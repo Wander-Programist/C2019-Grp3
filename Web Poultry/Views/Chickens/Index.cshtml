@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Web_Poultry.Models.Chicken>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ChickenType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChickenBirthWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChickenBirthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChickenType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChickenBirthWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChickenBirthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+
+    <tr>
+        <h3>
+            Testing
+        </h3>
+    </tr>
+}
+
+</table>
