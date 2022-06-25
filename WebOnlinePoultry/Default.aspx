@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Poultry Web" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebOnlinePoultry._Default" %>
+﻿<%@ Page Title="Poultry Homepage" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebOnlinePoultry._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
