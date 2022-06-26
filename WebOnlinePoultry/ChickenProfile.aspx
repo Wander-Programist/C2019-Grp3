@@ -71,48 +71,18 @@
             <div class="col-md-9">
                 <h3 style="font-weight:bolder">Database Section</h3>
 
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [AspNetChickenProfile]" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [AspNetChickenProfile] WHERE [chickenId] = @original_chickenId AND (([chickenType] = @original_chickenType) OR ([chickenType] IS NULL AND @original_chickenType IS NULL)) AND (([chickenBirthday] = @original_chickenBirthday) OR ([chickenBirthday] IS NULL AND @original_chickenBirthday IS NULL)) AND (([chickenBirthWeight] = @original_chickenBirthWeight) OR ([chickenBirthWeight] IS NULL AND @original_chickenBirthWeight IS NULL)) AND (([chickenBreed] = @original_chickenBreed) OR ([chickenBreed] IS NULL AND @original_chickenBreed IS NULL)) AND (([productType] = @original_productType) OR ([productType] IS NULL AND @original_productType IS NULL))" InsertCommand="INSERT INTO [AspNetChickenProfile] ([chickenId], [chickenType], [chickenBirthday], [chickenBirthWeight], [chickenBreed], [productType]) VALUES (@chickenId, @chickenType, @chickenBirthday, @chickenBirthWeight, @chickenBreed, @productType)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [AspNetChickenProfile] SET [chickenType] = @chickenType, [chickenBirthday] = @chickenBirthday, [chickenBirthWeight] = @chickenBirthWeight, [chickenBreed] = @chickenBreed, [productType] = @productType WHERE [chickenId] = @original_chickenId AND (([chickenType] = @original_chickenType) OR ([chickenType] IS NULL AND @original_chickenType IS NULL)) AND (([chickenBirthday] = @original_chickenBirthday) OR ([chickenBirthday] IS NULL AND @original_chickenBirthday IS NULL)) AND (([chickenBirthWeight] = @original_chickenBirthWeight) OR ([chickenBirthWeight] IS NULL AND @original_chickenBirthWeight IS NULL)) AND (([chickenBreed] = @original_chickenBreed) OR ([chickenBreed] IS NULL AND @original_chickenBreed IS NULL)) AND (([productType] = @original_productType) OR ([productType] IS NULL AND @original_productType IS NULL))">
-                    <DeleteParameters>
-                        <asp:Parameter Name="original_chickenId" Type="Int32" />
-                        <asp:Parameter Name="original_chickenType" Type="String" />
-                        <asp:Parameter DbType="Date" Name="original_chickenBirthday" />
-                        <asp:Parameter Name="original_chickenBirthWeight" Type="Double" />
-                        <asp:Parameter Name="original_chickenBreed" Type="String" />
-                        <asp:Parameter Name="original_productType" Type="String" />
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="chickenId" Type="Int32" />
-                        <asp:Parameter Name="chickenType" Type="String" />
-                        <asp:Parameter DbType="Date" Name="chickenBirthday" />
-                        <asp:Parameter Name="chickenBirthWeight" Type="Double" />
-                        <asp:Parameter Name="chickenBreed" Type="String" />
-                        <asp:Parameter Name="productType" Type="String" />
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="chickenType" Type="String" />
-                        <asp:Parameter DbType="Date" Name="chickenBirthday" />
-                        <asp:Parameter Name="chickenBirthWeight" Type="Double" />
-                        <asp:Parameter Name="chickenBreed" Type="String" />
-                        <asp:Parameter Name="productType" Type="String" />
-                        <asp:Parameter Name="original_chickenId" Type="Int32" />
-                        <asp:Parameter Name="original_chickenType" Type="String" />
-                        <asp:Parameter DbType="Date" Name="original_chickenBirthday" />
-                        <asp:Parameter Name="original_chickenBirthWeight" Type="Double" />
-                        <asp:Parameter Name="original_chickenBreed" Type="String" />
-                        <asp:Parameter Name="original_productType" Type="String" />
-                    </UpdateParameters>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ChickenProfile]" OldValuesParameterFormatString="original_{0}">
                 </asp:SqlDataSource>
 
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="chickenId" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" HorizontalAlign="Center" Width="100%" CellSpacing="2">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" HorizontalAlign="Center" Width="100%" CellSpacing="2">
                     <Columns>
-                        <asp:BoundField DataField="chickenId" HeaderText="ID" ReadOnly="True" SortExpression="chickenId" >
-                        <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" >
                         </asp:BoundField>
-                        <asp:BoundField DataField="chickenType" HeaderText="Chicken Type" SortExpression="chickenType" />
-                        <asp:BoundField DataField="chickenBirthday" HeaderText="Chicken Birthday" SortExpression="chickenBirthday" />
-                        <asp:BoundField DataField="chickenBirthWeight" HeaderText="Chicken Birth Weight" SortExpression="chickenBirthWeight" />
-                        <asp:BoundField DataField="chickenBreed" HeaderText="Chicken Breed" SortExpression="chickenBreed" />
-                        <asp:BoundField DataField="productType" HeaderText="Product Type" SortExpression="productType" />
+                        <asp:BoundField DataField="chickenType" HeaderText="chickenType" SortExpression="chickenType" />
+                        <asp:BoundField DataField="chickenBirthday" HeaderText="chickenBirthday" SortExpression="chickenBirthday" />
+                        <asp:BoundField DataField="chickenBirthWeight" HeaderText="chickenBirthWeight" SortExpression="chickenBirthWeight" />
+                        <asp:BoundField DataField="chickenBreed" HeaderText="chickenBreed" SortExpression="chickenBreed" />
+                        <asp:BoundField DataField="productType" HeaderText="productType" SortExpression="productType" />
                     </Columns>
                     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                     <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />

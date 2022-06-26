@@ -26,28 +26,28 @@ namespace WebOnlinePoultry
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string type = CType.SelectedItem.Text, breed = CBreed.SelectedItem.Text, ptype = Convert.ToString(ProductType.SelectedItem.Text);
-            string birthD = CBirthD.Text;
-            decimal birthW = Convert.ToDecimal(CBirthW.Text);
+            SqlCommand cmd = new SqlCommand("sp_Insert", cpc);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            string query = "INSERT INTO dbo.AspNetChickenProfile VALUES('"+type+"', '"+birthD+"', '"+birthW+"', '"+breed+"'. '"+ptype+"')";
-            SqlCommand cmd = new SqlCommand(query, cpc);
+            cmd.Parameters.AddWithValue("chickenType", CType.SelectedValue);
+            cmd.Parameters.AddWithValue("chickenBirthday", CBirthD.Text);
+            cmd.Parameters.AddWithValue("chickenBirthWeight", int.Parse(CBirthW.Text));
+            cmd.Parameters.AddWithValue("chickenBreed", CBreed.SelectedValue);
+            cmd.Parameters.AddWithValue("productType", ProductType.SelectedValue);
 
-            cmd.Parameters.AddWithValue("@chickenType", type);
-            cmd.Parameters.AddWithValue("@chickenBirthday", birthD);
-            cmd.Parameters.AddWithValue("@chickenBirthWeight", birthW);
-            cmd.Parameters.AddWithValue("@chickenBreed", breed);
-            cmd.Parameters.AddWithValue("@productType", ptype);
-
-            cmd.ExecuteNonQuery();
+            int k = cmd.ExecuteNonQuery();
+            if(k != 0)
+            {
+                dbUpdater.Text = "New data inserted to Database.";
+                dbUpdater.ForeColor = System.Drawing.Color.Aquamarine;
+                CType.SelectedIndex = -1;
+                CBirthD.Text = "";
+                CBirthW.Text = "";
+                CBreed.SelectedIndex = -1;
+                ProductType.SelectedIndex = -1;
+                GridView1.DataBind();
+            }
             cpc.Close();
-            dbUpdater.Text = "New data inserted to Database.";
-            GridView1.DataBind();
-            CType.SelectedIndex = -1;
-            CBirthD.Text = "";
-            CBirthW.Text = "";
-            CBreed.SelectedIndex = -1;
-            ProductType.SelectedIndex = -1;
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
