@@ -122,8 +122,7 @@ optgroup,
 select,
 textarea {
   color: inherit;
-  font: inherit;
-  margin: 0;
+  margin: 0 0 0 5px;
 }
 button {
   overflow: visible;
@@ -1599,8 +1598,8 @@ pre code {
   margin-left: auto;
 }
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .row-no-gutters {
   margin-right: 0;
@@ -1934,6 +1933,9 @@ pre code {
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: left;
   }
+  .col-md-custom1 {
+      width: 30%;
+  }
   .col-md-12 {
     width: 100%;
   }
@@ -2009,6 +2011,9 @@ pre code {
   .col-md-pull-0 {
     right: auto;
   }
+  .col-md-push-custom1 {
+      left: 2%;
+  }
   .col-md-push-12 {
     left: 100%;
   }
@@ -2047,6 +2052,9 @@ pre code {
   }
   .col-md-push-0 {
     left: auto;
+  }
+  .col-md-offset-custom1 {
+      margin-left: 5%;
   }
   .col-md-offset-12 {
     margin-left: 100%;
@@ -3017,7 +3025,7 @@ select[multiple].input-lg {
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #ffffff;
+  color: #1b1b1b;
   text-decoration: none;
 }
 .btn:active,
@@ -6702,7 +6710,6 @@ table .info a,
 }
 .has-warning .help-block,
 .has-warning .control-label,
-.has-warning .radio,
 .has-warning .checkbox,
 .has-warning .radio-inline,
 .has-warning .checkbox-inline,
