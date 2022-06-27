@@ -7,63 +7,65 @@
             <div class="col-md-3">
                 <h3 style="font-weight:bolder">
                     Create New Data</h3>
-                <table class="table">   
+                <table class="table" style="vertical-align: middle">   
                 <tr>  
                     <td style="width: inherit;">Chicken Type:</td>  
-                     <td>
+                     <td style="width: 100%">
                          <asp:RadioButtonList ID="CType" runat="server" RepeatDirection="Horizontal" Width="100%">
                              <asp:ListItem>Layer</asp:ListItem>
                              <asp:ListItem>Broiler</asp:ListItem>
                          </asp:RadioButtonList>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chicken type cannot be empty." ControlToValidate="CType" CssClass="text-danger"></asp:RequiredFieldValidator>
                      </td>  
                 </tr>  
                 <tr>  
                     <td style="width: inherit;">
                         Chicken Birthday:
                     </td>  
-                    <td aria-orientation="horizontal">  
-                        <asp:TextBox ID="CBirthD" runat="server" Width="100%"></asp:TextBox> 
-                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/calendar.png" DescriptionUrl="Calendar Picker" Height="20px" Width="20px" ImageAlign="AbsBottom" OnClick="ImageButton1_Click" />
-                        <asp:Calendar ID="Calendar1" runat="server" BackColor="White" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender="Calendar1_DayRender">
-                        </asp:Calendar>
+                    <td aria-orientation="horizontal" style="width: 100%">  
+                        <asp:TextBox ID="CBirthD" runat="server" Width="100%" type="date" value="12/30/1999" CssClass=""></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Chicken birthday cannot be empty." ControlToValidate="CBirthD" CssClass="text-danger"></asp:RequiredFieldValidator>
                     </td>  
                 </tr>  
                 <tr>  
                     <td style="width: inherit;">
                         Chicken Birth Weight:
                     </td>  
-                    <td>  
-                        <asp:TextBox ID="CBirthW" runat="server" Width="100%"></asp:TextBox> 
+                    <td style="width: 100%">  
+                        <asp:TextBox ID="CBirthW" runat="server" Width="100%"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chicken birthday weight cannot be empty." ControlToValidate="CBirthW" CssClass="text-danger"></asp:RequiredFieldValidator>
                     </td>  
                 </tr>  
                 <tr>  
                     <td style="width: inherit;">
                         Chicken Breed:
                     </td>  
-                    <td>  
+                    <td style="width: 100%">  
                         <asp:RadioButtonList ID="CBreed" runat="server" CssClass="radio, pull-left" RepeatDirection="Horizontal" Width="100%">
                             <asp:ListItem>Rooster</asp:ListItem>
                             <asp:ListItem>Hen</asp:ListItem>
                         </asp:RadioButtonList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Chicken breed cannot be empty." ControlToValidate="CBreed" CssClass="text-danger"></asp:RequiredFieldValidator>
                     </td>  
                </tr>  
                 <tr>  
                     <td style="width: inherit;">
                         Product Type:
                     </td>  
-                    <td>  
+                    <td style="width: 100%">  
                         <asp:RadioButtonList ID="ProductType" runat="server" RepeatDirection="Horizontal" Width="100%" CssClass="radio, pull-left">
                             <asp:ListItem Value="45 Days">45Days</asp:ListItem>
                             <asp:ListItem Value="Egg">EGG</asp:ListItem>
                         </asp:RadioButtonList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Product type cannot be empty." ControlToValidate="ProductType" CssClass="text-danger"></asp:RequiredFieldValidator>
                     </td>  
                 </tr>  
                 <tr>  
-                    <td style="width: inherit;">  
+                    <td colspan="2">  
                         <strong>  
-                        <asp:Button ID="createChicProf" runat="server" Text="Create" CssClass="btn-success" Width="100%" OnClick="Button1_Click" style="font-weight: bold" />
+                        <asp:Button ID="createChicProf" runat="server" Text="Create" CssClass="btn" OnClick="Button1_Click" style="font-weight: bold" Width="60%" />
                         </strong>
-                    </td>  
+                    </td>
                 </tr>  
             </table>
             </div>
@@ -76,7 +78,7 @@
 
                 <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" HorizontalAlign="Center" Width="100%" CellSpacing="2">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" >
+                        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" InsertVisible="False" >
                         </asp:BoundField>
                         <asp:BoundField DataField="chickenType" HeaderText="chickenType" SortExpression="chickenType" />
                         <asp:BoundField DataField="chickenBirthday" HeaderText="chickenBirthday" SortExpression="chickenBirthday" />
