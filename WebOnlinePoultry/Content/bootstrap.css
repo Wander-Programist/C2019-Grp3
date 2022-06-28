@@ -2336,8 +2336,15 @@ th {
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
+.table-hover > tbody > tr:hover > th {
+    background: #002cff;
+}
+.table-hover > tbody > tr > th:hover {
+    background-color: darkcyan;
+    color:coral;
+}
 .table-hover > tbody > tr:hover {
-  background-color: #f5f5f5;
+  background-color: #a4ffae;
 }
 .table > thead > tr > td.active,
 .table > tbody > tr > td.active,
@@ -2351,14 +2358,14 @@ th {
 .table > thead > tr.active > th,
 .table > tbody > tr.active > th,
 .table > tfoot > tr.active > th {
-  background-color: #f5f5f5;
+  background-color: #3fb618;
 }
 .table-hover > tbody > tr > td.active:hover,
 .table-hover > tbody > tr > th.active:hover,
 .table-hover > tbody > tr.active:hover > td,
 .table-hover > tbody > tr:hover > .active,
 .table-hover > tbody > tr.active:hover > th {
-  background-color: #e8e8e8;
+  background-color: #c2002b;
 }
 .table > thead > tr > td.success,
 .table > tbody > tr > td.success,
@@ -2372,14 +2379,14 @@ th {
 .table > thead > tr.success > th,
 .table > tbody > tr.success > th,
 .table > tfoot > tr.success > th {
-  background-color: #3fb618;
+    background-color: #002cff
 }
 .table-hover > tbody > tr > td.success:hover,
 .table-hover > tbody > tr > th.success:hover,
 .table-hover > tbody > tr.success:hover > td,
 .table-hover > tbody > tr:hover > .success,
 .table-hover > tbody > tr.success:hover > th {
-  background-color: #379f15;
+  background-color: #ff4309;
 }
 .table > thead > tr > td.info,
 .table > tbody > tr > td.info,
@@ -2421,7 +2428,7 @@ th {
 .table-hover > tbody > tr.warning:hover > td,
 .table-hover > tbody > tr:hover > .warning,
 .table-hover > tbody > tr.warning:hover > th {
-  background-color: #fe6600;
+  background-color: #000;
 }
 .table > thead > tr > td.danger,
 .table > tbody > tr > td.danger,
@@ -2442,11 +2449,16 @@ th {
 .table-hover > tbody > tr.danger:hover > td,
 .table-hover > tbody > tr:hover > .danger,
 .table-hover > tbody > tr.danger:hover > th {
-  background-color: #e60033;
+  background-color: #e043ff;
 }
 .table-responsive {
   min-height: .01%;
   overflow-x: auto;
+}
+.table-header {
+    font-weight:bolder;
+    background-color: #002cff;
+    text-decoration: none;
 }
 @media screen and (max-width: 767px) {
   .table-responsive {
@@ -2574,6 +2586,14 @@ output {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+.form-control-custome {
+    display: inline-block;
+    width: 100%;
+    height: 10%;
+    line-height: 1.42857143;
+    color: black;
+    background-color: #ffffff;
+}
 .form-control:focus {
   border-color: #66afe9;
   outline: 0;
@@ -2612,6 +2632,7 @@ textarea.form-control {
   input[type="datetime-local"].form-control,
   input[type="month"].form-control {
     line-height: 43px;
+    max-width: 280px;
   }
   input[type="date"].input-sm,
   input[type="time"].input-sm,
@@ -2643,6 +2664,20 @@ textarea.form-control {
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.radio-custome {
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    width: 100%;
+    max-width: 280px;
+}
+.radio-custome label {
+    min-height: 20px;
+    padding-left: 10px;
+    margin-right: 70px;
+    font-weight: bold;
+    cursor: pointer;
 }
 .radio.disabled label,
 .checkbox.disabled label,
@@ -3025,8 +3060,12 @@ select[multiple].input-lg {
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #1b1b1b;
   text-decoration: none;
+  background-color: #b6b6b6;
+  border: 1px solid #1b1b1b;
+  border-radius: 3px;
+  transform: scale(1.05);
+  transition: border .15s ease-in-out, transform .15s ease-in-out;
 }
 .btn:active,
 .btn.active {
@@ -3112,8 +3151,8 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #1967be;
-  border-color: #1862b5;
+  background-color: #1c78de;
+  border-color: #000;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3315,6 +3354,14 @@ fieldset[disabled] .btn-warning.focus {
   color: #ffffff;
   background-color: #ff0039;
   border-color: #ff0039;
+}
+.btn-text-custom {
+    text-align: center;
+    vertical-align: middle;
+    font-size: larger;
+    font-weight: bolder;
+    font-variant: small-caps;
+    padding: 0; margin: 0;
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -6829,4 +6876,7 @@ a.list-group-item-danger.active:focus {
 }
 .popover {
   color: #333333;
+}
+.scorlling {
+    position: absolute;
 }

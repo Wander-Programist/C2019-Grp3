@@ -16,8 +16,13 @@ namespace WebOnlinePoultry
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            cpc.Open();
-            GridView1.DataBind();
+            if (!IsPostBack)
+            {
+                cpc.Open();
+                GridView1.DataBind();
+                dbUpdater.Text = "Connection Success";
+                dbUpdater.ForeColor = System.Drawing.Color.Green;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -29,8 +34,8 @@ namespace WebOnlinePoultry
             int k = cmd.ExecuteNonQuery();
             if(k != 0)
             {
-                dbUpdater.Text = "New data inserted to Database.";
-                dbUpdater.ForeColor = System.Drawing.Color.Aquamarine;
+                dbUpdater.Text = "New data inserted!";
+                dbUpdater.ForeColor = System.Drawing.Color.Orange;
                 CType.SelectedIndex = -1;
                 CBirthD.Text = "";
                 CBirthW.Text = "";
@@ -39,12 +44,7 @@ namespace WebOnlinePoultry
                 GridView1.DataBind();
             }
             cpc.Close();
-            textUpdate();
         }
-        public void textUpdate()
-        {
-            dbUpdater.Text = "Database Updated.";
-            dbUpdater.ForeColor = System.Drawing.Color.BlueViolet;
-        }
+
     }
 }
