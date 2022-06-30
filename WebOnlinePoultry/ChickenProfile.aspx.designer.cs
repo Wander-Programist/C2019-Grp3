@@ -166,13 +166,31 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// HiddenField1 control.
+        /// mcdNotif control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mcdNotif;
+        
+        /// <summary>
+        /// mcdTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mcdTitle;
+        
+        /// <summary>
+        /// mcdText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mcdText;
         
         /// <summary>
         /// mcdType control.
@@ -193,13 +211,13 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.TextBox mcdBirthD;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// srcBy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList srcBy;
         
         /// <summary>
         /// mcdBirthW control.
@@ -211,13 +229,22 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.TextBox mcdBirthW;
         
         /// <summary>
+        /// srcMDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl srcMDiv;
+        
+        /// <summary>
         /// srcBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox srcBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText srcBox;
         
         /// <summary>
         /// srcButton control.
@@ -272,6 +299,24 @@ namespace WebOnlinePoultry {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList mcdProductType;
+        
+        /// <summary>
+        /// test1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label test1;
+        
+        /// <summary>
+        /// func1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label func1;
         
         /// <summary>
         /// GridView2 control.
