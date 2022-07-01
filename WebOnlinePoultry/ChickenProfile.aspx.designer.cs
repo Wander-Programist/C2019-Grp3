@@ -202,13 +202,13 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.RadioButtonList mcdType;
         
         /// <summary>
-        /// RequiredFieldValidator6 control.
+        /// mcdReqType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator mcdReqType;
         
         /// <summary>
         /// mcdBirthD control.
@@ -220,13 +220,13 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.TextBox mcdBirthD;
         
         /// <summary>
-        /// RequiredFieldValidator7 control.
+        /// mcdReqBirth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator mcdReqBirth;
         
         /// <summary>
         /// srcBy control.
@@ -247,22 +247,22 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.TextBox mcdBirthW;
         
         /// <summary>
-        /// RequiredFieldValidator8 control.
+        /// mcdReqWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator mcdReqWeight;
         
         /// <summary>
-        /// RangeValidator1 control.
+        /// mcdRanWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
+        protected global::System.Web.UI.WebControls.RangeValidator mcdRanWeight;
         
         /// <summary>
         /// srcMDiv control.
@@ -337,13 +337,13 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.RadioButtonList mcdBreed;
         
         /// <summary>
-        /// RequiredFieldValidator9 control.
+        /// mcdReqBreed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator mcdReqBreed;
         
         /// <summary>
         /// mcdSave control.
@@ -382,13 +382,13 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.RadioButtonList mcdProductType;
         
         /// <summary>
-        /// RequiredFieldValidator10 control.
+        /// mcdReqPType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator mcdReqPType;
         
         /// <summary>
         /// testout control.
@@ -400,12 +400,12 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl testout;
         
         /// <summary>
-        /// GridView2 control.
+        /// mcdGridOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.GridView mcdGridOut;
     }
 }

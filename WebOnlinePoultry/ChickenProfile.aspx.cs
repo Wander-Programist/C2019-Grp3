@@ -31,7 +31,6 @@ namespace WebOnlinePoultry
             }
             catch (Exception)
             {
-
                 throw;
             }
             if (!IsPostBack)
@@ -99,8 +98,8 @@ namespace WebOnlinePoultry
                 mcdBreed.SelectedIndex = -1;
                 mcdProductType.SelectedIndex = -1;
                 GridView1.DataBind();
-                GridView2.DataSource = "";
-                GridView2.DataBind();
+                mcdGridOut.DataSource = "";
+                mcdGridOut.DataBind();
             }
             cpc.Close(); 
         }
@@ -122,21 +121,7 @@ namespace WebOnlinePoultry
 
         }
 
-        protected void CBirthW_TextChanged(object sender, EventArgs e)
-        {
-            if (CBirthW.Text.Length >= 2)
-            {
-                int acceptednumber = Convert.ToInt32(CBirthW.Text);
-                if (acceptednumber < 0 || CBirthW.Text.StartsWith("-"))
-                {
-                    CBirthW.Text = "0";
-                }
-                else
-                {
-                    CBirthW.Text = CBirthW.Text;
-                }
-            }
-        }
+        int differencial;
 
         protected void srcBy_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -184,7 +169,13 @@ namespace WebOnlinePoultry
                     srcBoxRange.Enabled = true;
                     srcRadioValidator.Enabled = false;
                     srcBox.Attributes.Add("type", "number");
-                    srcBox.Attributes.Add("placeholder", "0");
+                    srcBox.Attributes.Add("placeholder", "ID");
+                    differencial = 1;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
 
                 case "srcTYPE":
@@ -225,6 +216,11 @@ namespace WebOnlinePoultry
                     srcBoxValidator.Enabled = false;
                     srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = true;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBIRTHD":
@@ -252,6 +248,11 @@ namespace WebOnlinePoultry
                     srcBoxValidator.Enabled = true;
                     srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = false;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBIRTHW":
@@ -279,7 +280,13 @@ namespace WebOnlinePoultry
                     srcBoxRange.Enabled = true;
                     srcRadioValidator.Enabled = false;
                     srcBox.Attributes.Add("type", "number");
-                    srcBox.Attributes.Add("placeholder", "0");
+                    srcBox.Attributes.Add("placeholder", "WEIGHT");
+                    differencial = 2;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBREED":
@@ -311,6 +318,11 @@ namespace WebOnlinePoultry
                     srcBoxValidator.Enabled = false;
                     srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = true;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
 
                 case "srcPTYPE":
@@ -342,6 +354,11 @@ namespace WebOnlinePoultry
                     srcBoxValidator.Enabled = false;
                     srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = true;
+                    mcdReqType.Enabled = true;
+                    mcdReqBirth.Enabled = true;
+                    mcdReqWeight.Enabled = true;
+                    mcdReqBreed.Enabled = true;
+                    mcdReqPType.Enabled = true;
                     break;
                 default:
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
@@ -354,17 +371,79 @@ namespace WebOnlinePoultry
                     srcBox.Visible = true;
                     srcRadio.Visible = false;
                     srcButton.Enabled = false;
+                    mcdReqType.Enabled = false;
+                    mcdReqBirth.Enabled = false;
+                    mcdReqWeight.Enabled = false;
+                    mcdReqBreed.Enabled = false;
+                    mcdReqPType.Enabled = false;
                     break;
             }
         }
 
         protected void srcButton_Click(object sender, EventArgs e)
         {
-            if (srcRadio.Enabled)
+            SqlCommand cmd = new SqlCommand("poultrySearch", cpc)
             {
-                string typeToSearch = srcRadio.SelectedValue;
-                testout.InnerText = typeToSearch.ToString();
+                CommandType = CommandType.StoredProcedure
+            };
+
+            if (srcRadio.Enabled && srcBox.Disabled)
+            {
+                switch (srcRadio.SelectedValue.ToString())
+                {
+                    case "Layer":
+                        cmd.Parameters.AddWithValue("@CType", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    case "Broiler":
+                        cmd.Parameters.AddWithValue("@CType", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    case "Rooster":
+                        cmd.Parameters.AddWithValue("@CBreed", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    case "Hen":
+                        cmd.Parameters.AddWithValue("@CBreed", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    case "45 Days":
+                        cmd.Parameters.AddWithValue("@CPType", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    case "EGG":
+                        cmd.Parameters.AddWithValue("@CPType", srcRadio.SelectedValue.ToString());
+                        break;
+
+                    default:
+                        testout.InnerText = "Opss somethings wrong";
+                        break;
+                }
             }
+            else if (srcBox.Type.Equals("number") && differencial == 1)
+            {
+                cmd.Parameters.AddWithValue("@Cid", int.Parse(srcBox.Value));
+            }
+            else if (srcBox.Type.Equals("number") && differencial == 2)
+            {
+                cmd.Parameters.AddWithValue("@CWeight", float.Parse(srcBox.Value));
+            }
+            else if (srcBox.Type.Equals("date"))
+            {
+                cmd.Parameters.AddWithValue("@CBirth", srcRadio.SelectedValue.ToString());
+            }
+            mcdGridOut.DataSource = cmd.ExecuteNonQuery();
+            mcdGridOut.DataBind();
+            cpc.Close();
+        }
+
+        protected void CType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mcdReqType.Enabled = false;
+            mcdReqBirth.Enabled = false;
+            mcdReqWeight.Enabled = false;
+            mcdReqBreed.Enabled = false;
+            mcdReqPType.Enabled = false;
         }
     }
 }

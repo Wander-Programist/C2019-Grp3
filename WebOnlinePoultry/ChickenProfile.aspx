@@ -12,7 +12,7 @@
                         <tr>  
                             <td style="width: inherit;">Chicken Type:</td>  
                                 <td style="width: 100%">
-                                    <asp:RadioButtonList ID="CType" runat="server" RepeatDirection="Horizontal" Width="100%">
+                                    <asp:RadioButtonList ID="CType" runat="server" RepeatDirection="Horizontal" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="CType_SelectedIndexChanged">
                                         <asp:ListItem>Layer</asp:ListItem>
                                         <asp:ListItem>Broiler</asp:ListItem>
                                     </asp:RadioButtonList>
@@ -33,7 +33,7 @@
                                 Chicken Birth Weight:
                             </td>  
                             <td style="width: 100%">  
-                                <asp:TextBox ID="CBirthW" runat="server" Width="100%" TextMode="number" placeholder="0" CssClass="form-control" OnTextChanged="CBirthW_TextChanged" ></asp:TextBox>
+                                <asp:TextBox ID="CBirthW" runat="server" Width="100%" TextMode="number" placeholder="0" CssClass="form-control" ></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chicken birth weight cannot be empty." Text="*" ControlToValidate="CBirthW" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                 <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="CBirthW" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999"></asp:RangeValidator>
                             </td>  
@@ -111,7 +111,7 @@
                                             <asp:ListItem>Layer</asp:ListItem>
                                             <asp:ListItem>Broiler</asp:ListItem>
                                         </asp:RadioButtonList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="mcdReqType" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <h2 class="form-control-custome label-info" style="font-weight:bolder; text-align:center; font-variant:small-caps; color: white; vertical-align: middle;">search by</h2>
@@ -123,7 +123,7 @@
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
                                         <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" format="dd/MMM/yyyy" CssClass="form-control" ></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="mcdReqBirth" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>  
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <asp:DropDownList ID="srcBy" runat="server" CssClass="form-control control-label" Font-Bold="true" AutoPostBack="True" OnSelectedIndexChanged="srcBy_SelectedIndexChanged" TabIndex="-1" >
@@ -143,14 +143,14 @@
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
                                         <asp:TextBox ID="mcdBirthW" runat="server" CssClass="form-control" max-width="auto"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Chicken birth weight cannot be empty." Text="*" ControlToValidate="mcdBirthW" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
-                                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="mcdBirthW" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999"></asp:RangeValidator>
+                                        <asp:RequiredFieldValidator ID="mcdReqWeight" runat="server" ErrorMessage="Chicken birth weight cannot be empty." Text="*" ControlToValidate="mcdBirthW" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
+                                        <asp:RangeValidator ID="mcdRanWeight" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="mcdBirthW" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999" Enabled="False"></asp:RangeValidator>
                                     </td>
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <div id="srcMDiv" class="form-group" runat="server">
                                             <div class="input-group">
                                                 <input id="srcBox" runat="server" class="form-control" disabled="disabled" enableviewstate="True" type="text" value="Selected (None)" visible="True" />
-                                                <asp:RadioButtonList ID="srcRadio" runat="server" AutoPostBack="True" CssClass="form-control-custome radio-custom" Visible="False" RepeatDirection="Horizontal" Width="100%">
+                                                <asp:RadioButtonList ID="srcRadio" runat="server" AutoPostBack="True" CssClass="form-control-custome radio-custom" Visible="False" RepeatDirection="Horizontal" Width="100%" >
                                                     <asp:ListItem></asp:ListItem>
                                                     <asp:ListItem></asp:ListItem>
                                                 </asp:RadioButtonList>
@@ -161,7 +161,7 @@
                                         </div>
                                         <asp:RequiredFieldValidator ID="srcBoxValidator" runat="server" ErrorMessage="RequiredFieldValidator" Display="Dynamic" Text="*" ControlToValidate="srcBox"></asp:RequiredFieldValidator>
                                         <asp:RequiredFieldValidator ID="srcRadioValidator" runat="server" ErrorMessage="RequiredFieldValidator" Display="Dynamic" Text="*" ControlToValidate="srcRadio"></asp:RequiredFieldValidator>
-                                                <asp:RangeValidator ID="srcBoxRange" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="srcBox" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999"></asp:RangeValidator>
+                                                <asp:RangeValidator ID="srcBoxRange" runat="server" ErrorMessage="Out of bounce." ControlToValidate="srcBox" Display="Dynamic" Type="Double" MinimumValue="1" MaximumValue="99999"></asp:RangeValidator>
                                     </td>
                                 </tr>  
                                 <tr>  
@@ -173,7 +173,7 @@
                                             <asp:ListItem>Rooster</asp:ListItem>
                                             <asp:ListItem>Hen</asp:ListItem>
                                         </asp:RadioButtonList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBreed" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="mcdReqBreed" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBreed" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
                                     <td style="text-align: left; vertical-align: middle"><asp:Button ID="mcdSave" runat="server" Text="save" CssClass="btn btn-success btn-text-custom" Font-Bold="True" Font-Size="XX-Large" style="padding: 0 10px 10px 10px; line-height: 1;" OnClick="mcdSave_Click" />
 
@@ -194,7 +194,7 @@
                                             <asp:ListItem Value="45 Days">45Days</asp:ListItem>
                                             <asp:ListItem Value="Egg">EGG</asp:ListItem>
                                         </asp:RadioButtonList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdProductType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="mcdReqPType" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdProductType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <h2 runat="server" id="testout"></h2>
@@ -203,7 +203,7 @@
                             </table>
                         </div>
                         <br />
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive table-hover" Height="50%" Width="100%">
+                        <asp:GridView ID="mcdGridOut" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive table-hover" Height="50%" Width="100%" GridLines="Vertical" EmptyDataText="No Data Record Found." >
                             <Columns>
                                 <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" InsertVisible="False" >
                                     <HeaderStyle HorizontalAlign="Center" />
