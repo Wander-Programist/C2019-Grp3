@@ -1,20 +1,6 @@
 ﻿<%@ Page Title="Chicken Profile" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ChickenProfile.aspx.cs" Inherits="WebOnlinePoultry.Database" ViewStateEncryptionMode="Never" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        function checkStatus(int change) {
-            var srcBoxStatus = document.getElementById("<%= srcBox.ClientID%>").type;
-            if (change == 0) {
-                srcBoxStatus.type = "search";
-            } else if (change == 1) {
-                srcBoxStatus.type = "number";
-            } else if (change == 2) {
-                srcBoxStatus.type = "date";
-            };
-        }
-    </script>
     <div class="row">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
@@ -117,27 +103,29 @@
                                 Accidentally deleting a data will lead to permanent data lost of selected data and cannot be recovered by server.</p>
                         </div>
                         <div>
-                            <table style="width:100%; vertical-align: middle; text-align: center;" class="table table-condensed table-responsive">
+                            <table style="width:100%; vertical-align: middle; " class="table table-condensed table-responsive">
                                 <tr>  
-                                    <td style="text-align: right; width: auto;">Chicken Type:</td>  
-                                    <td style="text-align: center; vertical-align: middle;">
+                                    <td style="text-align: right; ">Chicken Type:</td>  
+                                    <td style="text-align: left; vertical-align: middle;">
                                         <asp:RadioButtonList ID="mcdType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome" Font-Size="Medium" ToolTip="Types of Chicken" Height="100%">
                                             <asp:ListItem>Layer</asp:ListItem>
                                             <asp:ListItem>Broiler</asp:ListItem>
                                         </asp:RadioButtonList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                     </td>
-                                    <td colspan="3">
+                                    <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <h2 class="form-control-custome label-info" style="font-weight:bolder; text-align:center; font-variant:small-caps; color: white; vertical-align: middle;">search by</h2>
                                     </td>
                                 </tr>  
                                 <tr>  
-                                    <td style="text-align: right; width: auto;">
+                                    <td style="text-align: right; ">
                                         Chicken Birthday:
                                     </td>  
-                                    <td style="text-align: center; vertical-align: middle;">  
+                                    <td style="text-align: left; vertical-align: middle;">  
                                         <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" format="dd/MMM/yyyy" CssClass="form-control" ></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                     </td>  
-                                    <td colspan="3">
+                                    <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <asp:DropDownList ID="srcBy" runat="server" CssClass="form-control control-label" Font-Bold="true" AutoPostBack="True" OnSelectedIndexChanged="srcBy_SelectedIndexChanged" TabIndex="-1" >
                                             <asp:ListItem>(None)</asp:ListItem>
                                             <asp:ListItem Value="srcID">CHICKEN ID</asp:ListItem>
@@ -150,35 +138,44 @@
                                     </td>
                                 </tr>  
                                 <tr>  
-                                    <td style="text-align: right; width: auto;">
+                                    <td style="text-align: right; ">
                                         Chicken Birth Weight:
                                     </td>  
-                                    <td style="text-align: center; vertical-align: middle;">  
+                                    <td style="text-align: left; vertical-align: middle;">  
                                         <asp:TextBox ID="mcdBirthW" runat="server" CssClass="form-control" max-width="auto"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Chicken birth weight cannot be empty." Text="*" ControlToValidate="mcdBirthW" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                        <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="mcdBirthW" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999"></asp:RangeValidator>
                                     </td>
-                                    <td colspan="3">
+                                    <td colspan="3" style="text-align: left; vertical-align: middle">
                                         <div id="srcMDiv" class="form-group" runat="server">
                                             <div class="input-group">
-                                                <%--<asp:TextBox ID="srcBox1" runat="server" CssClass="form-control"  TextMode="Search" Width="90%" ></asp:TextBox>--%>
-                                                <input runat="server" id="srcBox" type="text" class="form-control" disabled="disabled" value="Selected (None)" >
-                                                <span class="input-group-btn pull-left">
-                                                    <asp:Button ID="srcButton" runat="server" Text="Search" CssClass="btn btn-primary" Font-Bold="False" Enabled="false" />
+                                                <input id="srcBox" runat="server" class="form-control" disabled="disabled" enableviewstate="True" type="text" value="Selected (None)" visible="True" />
+                                                <asp:RadioButtonList ID="srcRadio" runat="server" AutoPostBack="True" CssClass="form-control-custome radio-custom" Visible="False" RepeatDirection="Horizontal" Width="100%">
+                                                    <asp:ListItem></asp:ListItem>
+                                                    <asp:ListItem></asp:ListItem>
+                                                </asp:RadioButtonList>
+                                                <span class="input-group-btn">
+                                                <asp:Button ID="srcButton" runat="server" CssClass="btn btn-primary" Enabled="false" Font-Bold="False" Text="Search" OnClick="srcButton_Click" />
                                                 </span>
                                             </div>
                                         </div>
+                                        <asp:RequiredFieldValidator ID="srcBoxValidator" runat="server" ErrorMessage="RequiredFieldValidator" Display="Dynamic" Text="*" ControlToValidate="srcBox"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="srcRadioValidator" runat="server" ErrorMessage="RequiredFieldValidator" Display="Dynamic" Text="*" ControlToValidate="srcRadio"></asp:RequiredFieldValidator>
+                                                <asp:RangeValidator ID="srcBoxRange" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="srcBox" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999"></asp:RangeValidator>
                                     </td>
                                 </tr>  
                                 <tr>  
-                                    <td style="text-align: right; width: auto;">
+                                    <td style="text-align: right; ">
                                         Chicken Breed:
                                     </td>  
-                                    <td style="text-align: center; vertical-align: middle;">  
+                                    <td style="text-align: left; vertical-align: middle;">  
                                         <asp:RadioButtonList ID="mcdBreed" runat="server" CssClass="form-control-custome radio-custome" RepeatDirection="Horizontal">
                                             <asp:ListItem>Rooster</asp:ListItem>
                                             <asp:ListItem>Hen</asp:ListItem>
                                         </asp:RadioButtonList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBreed" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                     </td>
-                                    <td><asp:Button ID="mcdSave" runat="server" Text="save" CssClass="btn btn-success btn-text-custom" Font-Bold="True" Font-Size="XX-Large" style="padding: 0 10px 10px 10px; line-height: 1;" OnClick="mcdSave_Click" />
+                                    <td style="text-align: left; vertical-align: middle"><asp:Button ID="mcdSave" runat="server" Text="save" CssClass="btn btn-success btn-text-custom" Font-Bold="True" Font-Size="XX-Large" style="padding: 0 10px 10px 10px; line-height: 1;" OnClick="mcdSave_Click" />
 
                                     </td>
                                     <td>
@@ -192,16 +189,15 @@
                                     <td style="text-align: right">
                                         Product Type:
                                     </td>  
-                                    <td style="text-align: center; vertical-align: middle;">  
+                                    <td style="text-align: left; vertical-align: middle;">  
                                         <asp:RadioButtonList ID="mcdProductType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome">
                                             <asp:ListItem Value="45 Days">45Days</asp:ListItem>
                                             <asp:ListItem Value="Egg">EGG</asp:ListItem>
                                         </asp:RadioButtonList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdProductType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                     </td>
-                                    <td colspan="3">
-                                        <asp:Label ID="test1" runat="server" Text=""></asp:Label>
-                                        &nbsp;
-                                        <asp:Label ID="func1" runat="server" Text=""></asp:Label>
+                                    <td colspan="3" style="text-align: left; vertical-align: middle">
+                                        <h2 runat="server" id="testout"></h2>
                                     </td>
                                 </tr>  
                             </table>

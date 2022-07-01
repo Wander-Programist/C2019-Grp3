@@ -141,277 +141,230 @@ namespace WebOnlinePoultry
         protected void srcBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             string showtext = srcBy.SelectedItem.Text + " - " + srcBy.SelectedItem.Value;
+
             switch (srcBy.SelectedItem.Value)
             {
                 case "srcID":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "ID");
-                        srcBox.Disabled = false;
-                        srcBox.Attributes.Add("type", "number");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    if (srcBox.Type == "text")
-                        //    {
-                        //        func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //    }
-                        //    else
-                        //    {
-                        //        func1.Text = "Failed!";
-                        //    }
-                        //    ////Response.Write(check(number));
-                        //}
+                        if (!srcBox.Visible && srcRadio.Visible)
+                        {
+                            srcBox.Visible = true;
+                            srcBox.Disabled = false;
+                            srcButton.Enabled = true;
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
+                        else
+                        {
+                            srcBox.Visible = true;
+                            srcBox.Disabled = false;
+                            srcButton.Enabled = true;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "ID");
-                        srcBox.Disabled = false;
-                        srcBox.Attributes.Add("type", "number");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes["type"].Replace("text", "number");
-                        //    if (srcBox.Type == "text")
-                        //    {
-                        //        func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //    }
-                        //    else
-                        //    {
-                        //        func1.Text = "Failed!";
-                        //    }
-                        //    //Response.Write(check(number));
-                        //}
+                        if (!srcBox.Visible && srcRadio.Visible)
+                        {
+                            srcBox.Visible = true;
+                            srcBox.Disabled = false;
+                            srcButton.Enabled = true;
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
+                        else
+                        {
+                            srcBox.Visible = true;
+                            srcBox.Disabled = false;
+                            srcButton.Enabled = true;
+                        }
                     }
+                    srcBoxValidator.Enabled = true;
+                    srcBoxRange.Enabled = true;
+                    srcRadioValidator.Enabled = false;
+                    srcBox.Attributes.Add("type", "number");
+                    srcBox.Attributes.Add("placeholder", "0");
                     break;
 
                 case "srcTYPE":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                            
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    if (srcBox.Type == "text")
-                        //    {
-                        //        func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //    }
-                        //    else
-                        //    {
-                        //        func1.Text = "Failed!";
-                        //    }
-                        //    //Response.Write(check(search));
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                            srcRadio.Visible = true;
+                        }
+                        else
+                        {
+                            srcRadio.Visible = true;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    if (srcBox.Type == "text")
-                        //    {
-                        //        func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //    }
-                        //    else
-                        //    {
-                        //        func1.Text = "Failed!";
-                        //    }
-                        //    //Response.Write(check(search));
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                            srcRadio.Visible = true;
+                        }
+                        else
+                        {
+                            srcRadio.Visible = true;
+                        }
                     }
+                    srcRadio.Items.Clear();
+                    srcRadio.Items.Add("LAYER");
+                    srcRadio.Items[0].Value = "Layer";
+                    srcRadio.Items.Add("BROILER");
+                    srcRadio.Items[1].Value = "Broiler";
+                    srcButton.Enabled = true;
+                    srcRadio.CssClass = "form-control-custom radio-custom";
+                    srcBoxValidator.Enabled = false;
+                    srcBoxRange.Enabled = false;
+                    srcRadioValidator.Enabled = true;
                     break;
 
                 case "srcBIRTHD":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "date");
-                        //    //Response.Write(check(date));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (srcRadio.Visible && !srcBox.Visible)
+                        {
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "date");
-                        //    //Response.Write(check(date));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (srcRadio.Visible && !srcBox.Visible)
+                        {
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
                     }
+                    srcBox.Visible = true;
+                    srcBox.Disabled = false;
+                    srcButton.Enabled = true;
+                    srcBox.Attributes.Add("type", "date");
+                    srcBoxValidator.Enabled = true;
+                    srcBoxRange.Enabled = false;
+                    srcRadioValidator.Enabled = false;
                     break;
 
                 case "srcBIRTHW":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Birth Weight");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "number");
-                        //    //Response.Write(check(number));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcBox.Visible && srcRadio.Visible)
+                        {
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Birth Weight");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "number");
-                        //    //Response.Write(check(number));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcBox.Visible && srcRadio.Visible)
+                        {
+                            srcRadio.Items.Clear();
+                            srcRadio.Visible = false;
+                        }
                     }
+                    srcBox.Visible = true;
+                    srcBox.Disabled = false;
+                    srcButton.Enabled = true;
+                    srcBoxValidator.Enabled = true;
+                    srcBoxRange.Enabled = true;
+                    srcRadioValidator.Enabled = false;
+                    srcBox.Attributes.Add("type", "number");
+                    srcBox.Attributes.Add("placeholder", "0");
                     break;
 
                 case "srcBREED":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Breed");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    //Response.Write(check(search));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Chicken Breed");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    //Response.Write(check(search));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                        }
                     }
+                    srcRadio.Visible = true;
+                    srcButton.Enabled = true;
+                    srcRadio.Items.Clear();
+                    srcRadio.Items.Add("ROOSTER");
+                    srcRadio.Items[0].Value = "Rooster";
+                    srcRadio.Items.Add("HEN");
+                    srcRadio.Items[1].Value = "Hen";
+                    srcRadio.CssClass = "form-control-custom radio-custom";
+                    srcBoxValidator.Enabled = false;
+                    srcBoxRange.Enabled = false;
+                    srcRadioValidator.Enabled = true;
                     break;
 
                 case "srcPTYPE":
                     if (srcMDiv.Attributes["class"].Contains("has-success"))
                     {
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Product Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    //Response.Write(check(search));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                        }
                     }
                     else
                     {
                         srcMDiv.Attributes.Add("class", "has-success");
-                        srcBox.Value = "";
-                        srcBox.Attributes.Add("placeholder", "Product Type");
-                        //if (srcBox.Disabled && !srcButton.Enabled)
-                        //{
-                        //    srcBox.Attributes.Remove("disabled");
-                        //    srcButton.Enabled = true;
-                        //    srcBox.Attributes.Add("class", "has-success");
-                        //    srcBox.Attributes.Add("placeholder", "ID");
-                        //    srcBox.Attributes.Remove("type");
-                        //    srcBox.Attributes.Add("type", "search");
-                        //    //Response.Write(check(search));
-                        //    func1.Text = "switch " + srcBy.SelectedItem.Value + " Fired!";
-                        //}
+                        if (!srcRadio.Visible && srcBox.Visible)
+                        {
+                            srcBox.Disabled = true;
+                            srcBox.Visible = false;
+                        }
                     }
+                    srcButton.Enabled = true;
+                    srcRadio.Visible = true;
+                    srcRadio.Items.Clear();
+                    srcRadio.Items.Add("45 DAYS");
+                    srcRadio.Items[0].Value = "45 Days";
+                    srcRadio.Items.Add("EGG");
+                    srcRadio.Items[1].Value = "EGG";
+                    srcRadio.CssClass = "form-control-custom radio-custom";
+                    srcBoxValidator.Enabled = false;
+                    srcBoxRange.Enabled = false;
+                    srcRadioValidator.Enabled = true;
                     break;
                 default:
+                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    {
+                        srcMDiv.Attributes.Add("class", "form-group");
+                    }
+                    srcBox.Value = "(None)";
                     srcBox.Attributes.Add("placeholder", "(None)");
                     srcBox.Attributes.Add("disabled", "disabled");
-                    srcMDiv.Attributes["class"].Replace("has-success", "form-control");
+                    srcBox.Visible = true;
+                    srcRadio.Visible = false;
+                    srcButton.Enabled = false;
                     break;
             }
         }
 
-        private string check(string status)
+        protected void srcButton_Click(object sender, EventArgs e)
         {
-            string script = null;
-
-            switch (status)
+            if (srcRadio.Enabled)
             {
-                case "0":
-                    script = "<script type-text/javascript> var srcBoxStatus = document.getElementById(' <%=srcBox.ClientID %> ').type; if('"+status+"' == 0){ srcBox.type = 'search'}</script>";
-                    test1.Text = "Script 1 Fired";
-                    break;
-                case "1":
-                    script = "<script type-text/javascript> var srcBoxStatus = document.getElementById(' <%=srcBox.ClientID %> ').type; if('" + status + "' == 1){ srcBox.type = 'number'}</script>";
-                    test1.Text = "Script 2 Fired";
-                    break;
-                case "2":
-                    script = "<script type-text/javascript> var srcBoxStatus = document.getElementById(' <%=srcBox.ClientID %> ').type; if('" + status + "' == 2){ srcBox.type = 'date'}</script>";
-                    test1.Text = "Script 3 Fired";
-                    break;
-                default:
-                    test1.Text = "Script 0 Fired";
-                    break;
+                string typeToSearch = srcRadio.SelectedValue;
+                testout.InnerText = typeToSearch.ToString();
             }
-            return status = script;
         }
     }
 }

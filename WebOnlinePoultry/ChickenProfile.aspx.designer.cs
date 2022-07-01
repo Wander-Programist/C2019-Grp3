@@ -202,6 +202,15 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.RadioButtonList mcdType;
         
         /// <summary>
+        /// RequiredFieldValidator6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        
+        /// <summary>
         /// mcdBirthD control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace WebOnlinePoultry {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox mcdBirthD;
+        
+        /// <summary>
+        /// RequiredFieldValidator7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
         /// srcBy control.
@@ -229,6 +247,24 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.TextBox mcdBirthW;
         
         /// <summary>
+        /// RequiredFieldValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        
+        /// <summary>
+        /// RangeValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
+        
+        /// <summary>
         /// srcMDiv control.
         /// </summary>
         /// <remarks>
@@ -247,6 +283,15 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.HtmlControls.HtmlInputText srcBox;
         
         /// <summary>
+        /// srcRadio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList srcRadio;
+        
+        /// <summary>
         /// srcButton control.
         /// </summary>
         /// <remarks>
@@ -256,6 +301,33 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.Button srcButton;
         
         /// <summary>
+        /// srcBoxValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator srcBoxValidator;
+        
+        /// <summary>
+        /// srcRadioValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator srcRadioValidator;
+        
+        /// <summary>
+        /// srcBoxRange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator srcBoxRange;
+        
+        /// <summary>
         /// mcdBreed control.
         /// </summary>
         /// <remarks>
@@ -263,6 +335,15 @@ namespace WebOnlinePoultry {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList mcdBreed;
+        
+        /// <summary>
+        /// RequiredFieldValidator9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
         
         /// <summary>
         /// mcdSave control.
@@ -301,22 +382,22 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.RadioButtonList mcdProductType;
         
         /// <summary>
-        /// test1 control.
+        /// RequiredFieldValidator10 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label test1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
         
         /// <summary>
-        /// func1 control.
+        /// testout control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label func1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl testout;
         
         /// <summary>
         /// GridView2 control.
