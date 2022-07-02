@@ -7,7 +7,6 @@
                 <div class="col-md-3">
                     <h3 style="font-weight:bolder">
                         Create New Data</h3>
-                    <asp:Label ID="textWarning" runat="server" Text=""></asp:Label>
                     <table class="table table-condensed">   
                         <tr>  
                             <td style="width: inherit;">Chicken Type:</td>  
@@ -107,14 +106,14 @@
                                 <tr>  
                                     <td style="text-align: right; ">Chicken Type:</td>  
                                     <td style="text-align: left; vertical-align: middle;">
-                                        <asp:RadioButtonList ID="mcdType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome" Font-Size="Medium" ToolTip="Types of Chicken" Height="100%">
+                                        <asp:RadioButtonList ID="mcdType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome" Font-Size="Medium" ToolTip="Types of Chicken" Height="100%" AutoPostBack="True">
                                             <asp:ListItem>Layer</asp:ListItem>
                                             <asp:ListItem>Broiler</asp:ListItem>
                                         </asp:RadioButtonList>
                                         <asp:RequiredFieldValidator ID="mcdReqType" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
-                                    <td colspan="3" style="text-align: left; vertical-align: middle">
-                                        <h2 class="form-control-custome label-info" style="font-weight:bolder; text-align:center; font-variant:small-caps; color: white; vertical-align: middle;">search by</h2>
+                                    <td colspan="3">
+                                        <h1 style="text-align: center; vertical-align: middle; font-size: xx-large; font-weight: bolder; font-variant: small-caps; text-transform: uppercase; color: #FFFFFF; width: 100%;" class="form-control-custome label-info" style="font-weight:bolder; text-align:center; font-variant:small-caps; color: white; vertical-align: middle;">SEARCH BY</h1>
                                     </td>
                                 </tr>  
                                 <tr>  
@@ -122,7 +121,7 @@
                                         Chicken Birthday:
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
-                                        <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" format="dd/MMM/yyyy" CssClass="form-control" ></asp:TextBox>
+                                        <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" format="dd/MMM/yyyy" CssClass="form-control" AutoPostBack="True" ></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="mcdReqBirth" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>  
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
@@ -142,7 +141,7 @@
                                         Chicken Birth Weight:
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
-                                        <asp:TextBox ID="mcdBirthW" runat="server" CssClass="form-control" max-width="auto"></asp:TextBox>
+                                        <asp:TextBox ID="mcdBirthW" runat="server" CssClass="form-control" max-width="auto" AutoPostBack="True"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="mcdReqWeight" runat="server" ErrorMessage="Chicken birth weight cannot be empty." Text="*" ControlToValidate="mcdBirthW" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                         <asp:RangeValidator ID="mcdRanWeight" runat="server" ErrorMessage="Number should be greater than 0." ControlToValidate="mcdBirthW" Display="Dynamic" Type="Double" MinimumValue="0" MaximumValue="999" Enabled="False"></asp:RangeValidator>
                                     </td>
@@ -150,7 +149,7 @@
                                         <div id="srcMDiv" class="form-group" runat="server">
                                             <div class="input-group">
                                                 <input id="srcBox" runat="server" class="form-control" disabled="disabled" enableviewstate="True" type="text" value="Selected (None)" visible="True" />
-                                                <asp:RadioButtonList ID="srcRadio" runat="server" AutoPostBack="True" CssClass="form-control-custome radio-custom" Visible="False" RepeatDirection="Horizontal" Width="100%" >
+                                                <asp:RadioButtonList ID="srcRadio" runat="server" AutoPostBack="True" Visible="False" RepeatDirection="Horizontal" Width="100%" Enabled="False" >
                                                     <asp:ListItem></asp:ListItem>
                                                     <asp:ListItem></asp:ListItem>
                                                 </asp:RadioButtonList>
@@ -182,7 +181,7 @@
                                         <asp:Button ID="mcdClear" runat="server" Text="clear" CssClass="btn btn-warning btn-text-custom" Font-Bold="True" Font-Size="XX-Large" style="padding: 0 10px 10px 10px; line-height: 1;" OnClick="mcdClear_Click" CausesValidation="false" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="mcdDelte" runat="server" Text="delete" CssClass="btn btn-danger btn-text-custom" Font-Bold="True" Font-Size="XX-Large" style="padding: 0 10px 10px 10px; line-height: 1;" OnClick="mcdDelte_Click" />
+                                        &nbsp;
                                     </td>
                                 </tr>  
                                 <tr>  
@@ -190,46 +189,61 @@
                                         Product Type:
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
-                                        <asp:RadioButtonList ID="mcdProductType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome">
+                                        <asp:RadioButtonList ID="mcdProductType" runat="server" RepeatDirection="Horizontal" CssClass="form-control-custome radio-custome" AutoPostBack="True">
                                             <asp:ListItem Value="45 Days">45Days</asp:ListItem>
                                             <asp:ListItem Value="Egg">EGG</asp:ListItem>
                                         </asp:RadioButtonList>
                                         <asp:RequiredFieldValidator ID="mcdReqPType" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdProductType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
-                                        <h2 runat="server" id="testout"></h2>
+                                        <h2 id="testout" runat="server"></h2>
                                     </td>
                                 </tr>  
                             </table>
                         </div>
                         <br />
-                        <asp:GridView ID="mcdGridOut" runat="server" AutoGenerateColumns="false" CssClass="table table-responsive table-hover" Height="50%" Width="100%" GridLines="Vertical" EmptyDataText="No Data Record Found." >
+                        <asp:GridView ID="mcdGridOut" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive table-hover" Width="100%" GridLines="Vertical" EmptyDataText="No Data Record Found." AllowSorting="True" HorizontalAlign="Center"  DataKeyNames="Id" >
                             <Columns>
-                                <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" InsertVisible="False" >
+                                <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" InsertVisible="False" ItemStyle-Width="40" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                     </asp:BoundField>
+
                                 <asp:BoundField DataField="chickenType" HeaderText="TYPE" SortExpression="chickenType" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
+
                                 <asp:BoundField DataField="chickenBirthday" HeaderText="BIRTHDAY" SortExpression="chickenBirthday" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
+
                                 <asp:BoundField DataField="chickenBirthWeight" HeaderText="BIRTH WEIGHT" SortExpression="chickenBirthWeight" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
+
                                 <asp:BoundField DataField="chickenBreed" HeaderText="BREED" SortExpression="chickenBreed" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
+
                                 <asp:BoundField DataField="productType" HeaderText="PRODUCT TYPE" SortExpression="productType" >
                                     <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
+
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger" CommandArgument='<%# Eval("Id")%>'>LinkButton</asp:LinkButton>
+                                        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="mcdRowSelect_Click" />
                                     </ItemTemplate>
+                                    <ControlStyle CssClass="btn btn-default" />
+                                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                 </asp:TemplateField>
+
                             </Columns>
-                            <HeaderStyle CssClass="table-header" ForeColor="White" />
+                            <HeaderStyle CssClass="table-header" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" />
                         </asp:GridView>
                 </div>
             </ContentTemplate>

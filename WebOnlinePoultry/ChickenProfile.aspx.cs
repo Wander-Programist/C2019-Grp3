@@ -17,21 +17,17 @@ namespace WebOnlinePoultry
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string warn = "Accidentally clicked this will lead to permanent data lost.";
-            mcdDelte.ToolTip = warn;
-
             if(cpc.State == ConnectionState.Open)
             {
                 cpc.Close();
             }
-            textWarning.Text = "";
             try
             {
                 cpc.Open();
             }
             catch (Exception)
             {
-                throw;
+                Server.TransferRequest(Request.Url.AbsolutePath, false);
             }
             if (!IsPostBack)
             {
@@ -55,9 +51,6 @@ namespace WebOnlinePoultry
             int k = cmd.ExecuteNonQuery();
             if (k != 0)
             {
-                textWarning.Text = "New data added!";
-                textWarning.Font.Bold = true;
-                textWarning.ForeColor = System.Drawing.Color.GreenYellow;
                 CType.SelectedIndex = -1;
                 CBirthD.Text = "";
                 CBirthW.Text = "";
@@ -66,24 +59,26 @@ namespace WebOnlinePoultry
                 GridView1.DataBind();
             }
             cpc.Close();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('New data added!')", true);
         }
 
         protected void mcdSave_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("poultrySave", cpc);
+            int rowIndex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            SqlCommand cmd = new SqlCommand("poultryUpdate", cpc);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@sCType", mcdType.SelectedValue);
-            cmd.Parameters.AddWithValue("@sCBirthD", mcdBirthD.Text);
-            cmd.Parameters.AddWithValue("@sCBirthW", float.Parse(mcdBirthW.Text));
-            cmd.Parameters.AddWithValue("@sCBreed", mcdBreed.SelectedValue);
-            cmd.Parameters.AddWithValue("@sPType", mcdProductType.SelectedValue);
+            cmd.Parameters.AddWithValue("@Uid", mcdGridOut.Rows[rowIndex].Cells[0].Text.Trim());
+            cmd.Parameters.AddWithValue("@uCType", mcdType.SelectedValue);
+            cmd.Parameters.AddWithValue("@uCBirth", mcdBirthD.Text);
+            cmd.Parameters.AddWithValue("@uCWeight", float.Parse(mcdBirthW.Text));
+            cmd.Parameters.AddWithValue("@uCBreed", mcdBreed.SelectedValue);
+            cmd.Parameters.AddWithValue("@uCPType", mcdProductType.SelectedValue);
 
             if (cpc.State == ConnectionState.Open)
             {
                 cpc.Close();
             }
-            textWarning.Text = "";
             cpc.Open();
 
             double k = cmd.ExecuteNonQuery();
@@ -101,7 +96,8 @@ namespace WebOnlinePoultry
                 mcdGridOut.DataSource = "";
                 mcdGridOut.DataBind();
             }
-            cpc.Close(); 
+            cpc.Close();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script","alert('Data has been updated!')", true);
         }
 
         protected void mcdClear_Click(object sender, EventArgs e)
@@ -121,318 +117,237 @@ namespace WebOnlinePoultry
 
         }
 
-        int differencial;
-
         protected void srcBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string showtext = srcBy.SelectedItem.Text + " - " + srcBy.SelectedItem.Value;
-
-            switch (srcBy.SelectedItem.Value)
+            switch (srcBy.SelectedValue)
             {
                 case "srcID":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && srcRadio.Visible && !srcBox.Visible)
                     {
-                        if (!srcBox.Visible && srcRadio.Visible)
-                        {
-                            srcBox.Visible = true;
-                            srcBox.Disabled = false;
-                            srcButton.Enabled = true;
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
-                        else
-                        {
-                            srcBox.Visible = true;
-                            srcBox.Disabled = false;
-                            srcButton.Enabled = true;
-                        }
+                        srcRadio.Enabled = false;
+                        srcRadio.Visible = false;
+                        srcRadio.Items.Clear();
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (!srcBox.Visible && srcRadio.Visible)
-                        {
-                            srcBox.Visible = true;
-                            srcBox.Disabled = false;
-                            srcButton.Enabled = true;
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
-                        else
-                        {
-                            srcBox.Visible = true;
-                            srcBox.Disabled = false;
-                            srcButton.Enabled = true;
-                        }
-                    }
-                    srcBoxValidator.Enabled = true;
-                    srcBoxRange.Enabled = true;
-                    srcRadioValidator.Enabled = false;
+
+                    srcBox.Disabled = false;
+                    srcBox.Visible = true;
                     srcBox.Attributes.Add("type", "number");
                     srcBox.Attributes.Add("placeholder", "ID");
-                    differencial = 1;
+
+                    srcButton.Enabled = true;
+                    srcBoxRange.Enabled = true;
+                    srcBoxValidator.Enabled = true;
+                    srcRadioValidator.Enabled = false;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
                 case "srcTYPE":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && !srcBox.Disabled || srcBox.Visible)
                     {
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                            srcRadio.Visible = true;
-                        }
-                        else
-                        {
-                            srcRadio.Visible = true;
-                        }
+                        srcBox.Visible = false;
+                        srcBox.Disabled = true;
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                            srcRadio.Visible = true;
-                        }
-                        else
-                        {
-                            srcRadio.Visible = true;
-                        }
-                    }
-                    srcRadio.Items.Clear();
-                    srcRadio.Items.Add("LAYER");
-                    srcRadio.Items[0].Value = "Layer";
-                    srcRadio.Items.Add("BROILER");
-                    srcRadio.Items[1].Value = "Broiler";
+
+                    srcRadio.Enabled = true;
+                    srcRadio.Visible = true;
                     srcButton.Enabled = true;
-                    srcRadio.CssClass = "form-control-custom radio-custom";
-                    srcBoxValidator.Enabled = false;
-                    srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = true;
+                    srcRadio.Items.Clear();
+                    srcRadio.Items.Add("Layer");
+                    srcRadio.Items[0].Value = "Layer";
+                    srcRadio.Items.Add("Broiler");
+                    srcRadio.Items[1].Value = "Broiler";
+                    srcRadio.Attributes.Add("CssClass", "form-control-custome radio-custome");
+
+                    srcBoxRange.Enabled = false;
+                    srcBoxValidator.Enabled = false;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBIRTHD":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && srcRadio.Visible && srcBox.Disabled)
                     {
-                        if (srcRadio.Visible && !srcBox.Visible)
-                        {
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
+                        srcRadio.Items.Clear();
+                        srcRadio.Enabled = false;
+                        srcRadio.Visible = false;
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (srcRadio.Visible && !srcBox.Visible)
-                        {
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
-                    }
-                    srcBox.Visible = true;
+
                     srcBox.Disabled = false;
-                    srcButton.Enabled = true;
+                    srcBox.Visible = true;
                     srcBox.Attributes.Add("type", "date");
+                    srcBox.Attributes.Add("placeholder", "ID");
+
+                    srcButton.Enabled = true;
                     srcBoxValidator.Enabled = true;
                     srcBoxRange.Enabled = false;
                     srcRadioValidator.Enabled = false;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBIRTHW":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && srcRadio.Visible && !srcBox.Visible || srcBox.Disabled)
                     {
-                        if (!srcBox.Visible && srcRadio.Visible)
-                        {
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
+                        srcRadio.Items.Clear();
+                        srcRadio.Enabled = false;
+                        srcRadio.Visible = false;
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (!srcBox.Visible && srcRadio.Visible)
-                        {
-                            srcRadio.Items.Clear();
-                            srcRadio.Visible = false;
-                        }
-                    }
-                    srcBox.Visible = true;
+
                     srcBox.Disabled = false;
+                    srcBox.Visible = true;
+                    srcBox.Attributes.Add("type", "number");
+                    srcBox.Attributes.Add("placeholder", "Weight");
+
                     srcButton.Enabled = true;
                     srcBoxValidator.Enabled = true;
                     srcBoxRange.Enabled = true;
                     srcRadioValidator.Enabled = false;
-                    srcBox.Attributes.Add("type", "number");
-                    srcBox.Attributes.Add("placeholder", "WEIGHT");
-                    differencial = 2;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
                 case "srcBREED":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && !srcBox.Disabled || srcBox.Visible)
                     {
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                        }
+                        srcBox.Visible = false;
+                        srcBox.Disabled = true;
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                        }
-                    }
-                    srcRadio.Visible = true;
-                    srcButton.Enabled = true;
+
                     srcRadio.Items.Clear();
-                    srcRadio.Items.Add("ROOSTER");
+                    srcRadio.Enabled = true;
+                    srcRadio.Visible = true;
+                    srcRadio.Items.Add("Rooster");
                     srcRadio.Items[0].Value = "Rooster";
-                    srcRadio.Items.Add("HEN");
+                    srcRadio.Items.Add("Hen");
                     srcRadio.Items[1].Value = "Hen";
-                    srcRadio.CssClass = "form-control-custom radio-custom";
-                    srcBoxValidator.Enabled = false;
-                    srcBoxRange.Enabled = false;
+
+                    srcButton.Enabled = true;
                     srcRadioValidator.Enabled = true;
+                    srcBoxRange.Enabled = false;
+                    srcBoxValidator.Enabled = false;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
                 case "srcPTYPE":
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
+                    if (srcRadio.Enabled && !srcBox.Disabled || srcBox.Visible)
                     {
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                        }
+                        srcBox.Visible = false;
+                        srcBox.Disabled = true;
                     }
-                    else
-                    {
-                        srcMDiv.Attributes.Add("class", "has-success");
-                        if (!srcRadio.Visible && srcBox.Visible)
-                        {
-                            srcBox.Disabled = true;
-                            srcBox.Visible = false;
-                        }
-                    }
-                    srcButton.Enabled = true;
-                    srcRadio.Visible = true;
+
                     srcRadio.Items.Clear();
-                    srcRadio.Items.Add("45 DAYS");
+                    srcRadio.Enabled = true;
+                    srcRadio.Visible = true;
+                    srcRadio.Items.Add("45 Days");
                     srcRadio.Items[0].Value = "45 Days";
-                    srcRadio.Items.Add("EGG");
-                    srcRadio.Items[1].Value = "EGG";
-                    srcRadio.CssClass = "form-control-custom radio-custom";
-                    srcBoxValidator.Enabled = false;
-                    srcBoxRange.Enabled = false;
+                    srcRadio.Items.Add("Egg");
+                    srcRadio.Items[1].Value = "Egg";
+
+                    srcButton.Enabled = true;
                     srcRadioValidator.Enabled = true;
+                    srcBoxRange.Enabled = false;
+                    srcBoxValidator.Enabled = false;
+
                     mcdReqType.Enabled = true;
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
+                    mcdRanWeight.Enabled = true;
                     mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
+
                 default:
-                    if (srcMDiv.Attributes["class"].Contains("has-success"))
-                    {
-                        srcMDiv.Attributes.Add("class", "form-group");
-                    }
-                    srcBox.Value = "(None)";
-                    srcBox.Attributes.Add("placeholder", "(None)");
-                    srcBox.Attributes.Add("disabled", "disabled");
+                    srcBox.Disabled = true;
                     srcBox.Visible = true;
+                    srcBox.Value = "(None)";
+                    srcRadio.Items.Clear();
                     srcRadio.Visible = false;
+                    srcRadio.Enabled = false;
                     srcButton.Enabled = false;
+
+                    srcBoxValidator.Enabled = false;
+                    srcBoxRange.Enabled = false;
+                    srcRadioValidator.Enabled = false;
+
                     mcdReqType.Enabled = false;
                     mcdReqBirth.Enabled = false;
                     mcdReqWeight.Enabled = false;
+                    mcdRanWeight.Enabled = false;
                     mcdReqBreed.Enabled = false;
                     mcdReqPType.Enabled = false;
                     break;
             }
+            mcdType.SelectedIndex = -1;
+            mcdBirthD.Text = "";
+            mcdBirthW.Text = "";
+            mcdBreed.SelectedIndex = -1;
+            mcdProductType.SelectedIndex = -1;
         }
 
         protected void srcButton_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("poultrySearch", cpc)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
+            SqlCommand cmd = new SqlCommand("poultrySearchBy", cpc);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             if (srcRadio.Enabled && srcBox.Disabled)
             {
-                switch (srcRadio.SelectedValue.ToString())
+                if (srcBy.SelectedValue.Equals("srcTYPE"))
                 {
-                    case "Layer":
-                        cmd.Parameters.AddWithValue("@CType", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    case "Broiler":
-                        cmd.Parameters.AddWithValue("@CType", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    case "Rooster":
-                        cmd.Parameters.AddWithValue("@CBreed", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    case "Hen":
-                        cmd.Parameters.AddWithValue("@CBreed", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    case "45 Days":
-                        cmd.Parameters.AddWithValue("@CPType", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    case "EGG":
-                        cmd.Parameters.AddWithValue("@CPType", srcRadio.SelectedValue.ToString());
-                        break;
-
-                    default:
-                        testout.InnerText = "Opss somethings wrong";
-                        break;
+                    cmd.Parameters.AddWithValue("@CType", Convert.ToString(srcRadio.SelectedValue));
+                }
+                else if (srcBy.SelectedValue.Equals("srcBREED"))
+                {
+                    cmd.Parameters.AddWithValue("@CBreed", Convert.ToString(srcRadio.SelectedValue));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@CPType", Convert.ToString(srcRadio.SelectedValue));
                 }
             }
-            else if (srcBox.Type.Equals("number") && differencial == 1)
+            if (!srcBox.Disabled && srcBox.Type.Equals("number"))
             {
-                cmd.Parameters.AddWithValue("@Cid", int.Parse(srcBox.Value));
+                if (srcBy.SelectedValue.Equals("srcID"))
+                {
+                    cmd.Parameters.AddWithValue("@Cid", Convert.ToInt32(srcBox.Value));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@CWeight", float.Parse(srcBox.Value));
+                }
             }
-            else if (srcBox.Type.Equals("number") && differencial == 2)
+            if (!srcBox.Disabled && srcBox.Type.Equals("date"))
             {
-                cmd.Parameters.AddWithValue("@CWeight", float.Parse(srcBox.Value));
+                cmd.Parameters.AddWithValue("@CBirth", Convert.ToString(srcBox.Value));
             }
-            else if (srcBox.Type.Equals("date"))
-            {
-                cmd.Parameters.AddWithValue("@CBirth", srcRadio.SelectedValue.ToString());
-            }
-            mcdGridOut.DataSource = cmd.ExecuteNonQuery();
+            mcdGridOut.DataSource = cmd.ExecuteReader();
             mcdGridOut.DataBind();
             cpc.Close();
         }
@@ -444,6 +359,53 @@ namespace WebOnlinePoultry
             mcdReqWeight.Enabled = false;
             mcdReqBreed.Enabled = false;
             mcdReqPType.Enabled = false;
+        }
+
+        protected void mcdRowSelect_Click(object sender, EventArgs e)
+        {
+            int rowIndex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+
+            if (mcdGridOut.Rows[rowIndex].Cells[1].Text.Trim().Equals("Layer"))
+            {
+                mcdType.SelectedIndex = 0;
+            }
+            else if (mcdGridOut.Rows[rowIndex].Cells[1].Text.Trim().Equals("Broiler"))
+            {
+                mcdType.SelectedIndex = 1;
+            }
+            else
+            {
+                mcdType.SelectedIndex = -1;
+            }
+
+            mcdBirthD.Text = mcdGridOut.Rows[rowIndex].Cells[2].Text;
+            mcdBirthW.Text = mcdGridOut.Rows[rowIndex].Cells[3].Text;
+
+            if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("Rooster"))
+            {
+                mcdBreed.SelectedIndex = 0;
+            }
+            else if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("Hen"))
+            {
+                mcdBreed.SelectedIndex = 1;
+            }
+            else
+            {
+                mcdBreed.SelectedIndex = -1;
+            }
+
+            if (mcdGridOut.Rows[rowIndex].Cells[5].Text.Trim().Equals("45 Days"))
+            {
+                mcdProductType.SelectedIndex = 0;
+            }
+            else if (mcdGridOut.Rows[rowIndex].Cells[5].Text.Trim().Equals("Egg"))
+            {
+                mcdProductType.SelectedIndex = 1;
+            }
+            else
+            {
+                mcdProductType.SelectedIndex = -1;
+            }
         }
     }
 }
