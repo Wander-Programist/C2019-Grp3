@@ -42,7 +42,6 @@ namespace WebOnlinePoultry
             mcdReqType.Enabled = false;
             mcdReqBirth.Enabled = false;
             mcdReqWeight.Enabled = false;
-            mcdReqBreed.Enabled = false;
             mcdReqPType.Enabled = false;
         }
 
@@ -54,7 +53,6 @@ namespace WebOnlinePoultry
             cmd.Parameters.AddWithValue("@iCType", CType.SelectedValue);
             cmd.Parameters.AddWithValue("@iCBirthD", CBirthD.Text);
             cmd.Parameters.AddWithValue("@iCBirthW", float.Parse(CBirthW.Text));
-            cmd.Parameters.AddWithValue("@iCBreed", CBreed.SelectedValue);
             cmd.Parameters.AddWithValue("@iPType", ProductType.SelectedValue);
 
             int k = cmd.ExecuteNonQuery();
@@ -63,7 +61,6 @@ namespace WebOnlinePoultry
                 CType.SelectedIndex = -1;
                 CBirthD.Text = "";
                 CBirthW.Text = "";
-                CBreed.SelectedIndex = -1;
                 ProductType.SelectedIndex = -1;
                 GridView1.DataBind();
             }
@@ -97,7 +94,6 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
                     mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
@@ -117,6 +113,8 @@ namespace WebOnlinePoultry
                     srcRadio.Items[0].Value = "Layer";
                     srcRadio.Items.Add("Broiler");
                     srcRadio.Items[1].Value = "Broiler";
+                    srcRadio.Items.Add("Native");
+                    srcRadio.Items[2].Value = "Native";
                     srcRadio.Attributes.Add("CssClass", "form-control-custome radio-custome");
 
                     srcBoxRange.Enabled = false;
@@ -126,7 +124,6 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
                     mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
@@ -152,7 +149,6 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
                     mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
@@ -178,35 +174,6 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
                     mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
-                    mcdReqPType.Enabled = true;
-                    break;
-
-                case "srcBREED":
-                    if (srcRadio.Enabled && !srcBox.Disabled || srcBox.Visible)
-                    {
-                        srcBox.Visible = false;
-                        srcBox.Disabled = true;
-                    }
-
-                    srcRadio.Items.Clear();
-                    srcRadio.Enabled = true;
-                    srcRadio.Visible = true;
-                    srcRadio.Items.Add("Rooster");
-                    srcRadio.Items[0].Value = "Rooster";
-                    srcRadio.Items.Add("Hen");
-                    srcRadio.Items[1].Value = "Hen";
-
-                    srcButton.Enabled = true;
-                    srcRadioValidator.Enabled = true;
-                    srcBoxRange.Enabled = false;
-                    srcBoxValidator.Enabled = false;
-
-                    mcdReqType.Enabled = true;
-                    mcdReqBirth.Enabled = true;
-                    mcdReqWeight.Enabled = true;
-                    mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
@@ -222,8 +189,8 @@ namespace WebOnlinePoultry
                     srcRadio.Visible = true;
                     srcRadio.Items.Add("45 Days");
                     srcRadio.Items[0].Value = "45 Days";
-                    srcRadio.Items.Add("Egg");
-                    srcRadio.Items[1].Value = "Egg";
+                    srcRadio.Items.Add("9 Days");
+                    srcRadio.Items[1].Value = "9 Days";
 
                     srcButton.Enabled = true;
                     srcRadioValidator.Enabled = true;
@@ -234,7 +201,6 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = true;
                     mcdReqWeight.Enabled = true;
                     mcdRanWeight.Enabled = true;
-                    mcdReqBreed.Enabled = true;
                     mcdReqPType.Enabled = true;
                     break;
 
@@ -255,14 +221,12 @@ namespace WebOnlinePoultry
                     mcdReqBirth.Enabled = false;
                     mcdReqWeight.Enabled = false;
                     mcdRanWeight.Enabled = false;
-                    mcdReqBreed.Enabled = false;
                     mcdReqPType.Enabled = false;
                     break;
             }
             mcdType.SelectedIndex = -1;
             mcdBirthD.Text = "";
             mcdBirthW.Text = "";
-            mcdBreed.SelectedIndex = -1;
             mcdProductType.SelectedIndex = -1;
         }
 
@@ -276,10 +240,6 @@ namespace WebOnlinePoultry
                 if (srcBy.SelectedValue.Equals("srcTYPE"))
                 {
                     cmd.Parameters.AddWithValue("@CType", Convert.ToString(srcRadio.SelectedValue));
-                }
-                else if (srcBy.SelectedValue.Equals("srcBREED"))
-                {
-                    cmd.Parameters.AddWithValue("@CBreed", Convert.ToString(srcRadio.SelectedValue));
                 }
                 else
                 {
@@ -320,6 +280,10 @@ namespace WebOnlinePoultry
             {
                 mcdType.SelectedIndex = 1;
             }
+            else if (mcdGridOut.Rows[rowIndex].Cells[1].Text.Trim().Equals("Native"))
+            {
+                mcdType.SelectedIndex = 2;
+            }
             else
             {
                 mcdType.SelectedIndex = -1;
@@ -328,24 +292,11 @@ namespace WebOnlinePoultry
             mcdBirthD.Text = mcdGridOut.Rows[rowIndex].Cells[2].Text;
             mcdBirthW.Text = mcdGridOut.Rows[rowIndex].Cells[3].Text;
 
-            if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("Rooster"))
-            {
-                mcdBreed.SelectedIndex = 0;
-            }
-            else if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("Hen"))
-            {
-                mcdBreed.SelectedIndex = 1;
-            }
-            else
-            {
-                mcdBreed.SelectedIndex = -1;
-            }
-
-            if (mcdGridOut.Rows[rowIndex].Cells[5].Text.Trim().Equals("45 Days"))
+            if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("45 Days"))
             {
                 mcdProductType.SelectedIndex = 0;
             }
-            else if (mcdGridOut.Rows[rowIndex].Cells[5].Text.Trim().Equals("Egg"))
+            else if (mcdGridOut.Rows[rowIndex].Cells[4].Text.Trim().Equals("9 Days"))
             {
                 mcdProductType.SelectedIndex = 1;
             }
@@ -363,7 +314,6 @@ namespace WebOnlinePoultry
             mcdType.SelectedIndex = -1;
             mcdBirthD.Text = "DD/MM/YYYY";
             mcdBirthW.Text = "0";
-            mcdBreed.SelectedIndex = -1;
             mcdProductType.SelectedIndex = -1;
         }
 
@@ -376,7 +326,6 @@ namespace WebOnlinePoultry
             cmd.Parameters.AddWithValue("@uCType", mcdType.SelectedValue);
             cmd.Parameters.AddWithValue("@uCBirth", mcdBirthD.Text);
             cmd.Parameters.AddWithValue("@uCWeight", float.Parse(mcdBirthW.Text));
-            cmd.Parameters.AddWithValue("@uCBreed", mcdBreed.SelectedValue);
             cmd.Parameters.AddWithValue("@uCPType", mcdProductType.SelectedValue);
 
             if (cpc.State == ConnectionState.Open)
@@ -394,7 +343,6 @@ namespace WebOnlinePoultry
                 mcdType.SelectedIndex = -1;
                 mcdBirthD.Text = "DD/MM/YYYY";
                 mcdBirthW.Text = "0";
-                mcdBreed.SelectedIndex = -1;
                 mcdProductType.SelectedIndex = -1;
                 GridView1.DataBind();
                 mcdGridOut.DataSource = "";
