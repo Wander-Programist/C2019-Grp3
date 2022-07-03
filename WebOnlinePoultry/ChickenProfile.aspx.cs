@@ -37,6 +37,15 @@ namespace WebOnlinePoultry
             }
         }
 
+        protected void CType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mcdReqType.Enabled = false;
+            mcdReqBirth.Enabled = false;
+            mcdReqWeight.Enabled = false;
+            mcdReqBreed.Enabled = false;
+            mcdReqPType.Enabled = false;
+        }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
             SqlCommand cmd = new SqlCommand("poultryInsert", cpc);
@@ -60,61 +69,6 @@ namespace WebOnlinePoultry
             }
             cpc.Close();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('New data added!')", true);
-        }
-
-        protected void mcdSave_Click(object sender, EventArgs e)
-        {
-            int rowIndex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
-            SqlCommand cmd = new SqlCommand("poultryUpdate", cpc);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@Uid", mcdGridOut.Rows[rowIndex].Cells[0].Text.Trim());
-            cmd.Parameters.AddWithValue("@uCType", mcdType.SelectedValue);
-            cmd.Parameters.AddWithValue("@uCBirth", mcdBirthD.Text);
-            cmd.Parameters.AddWithValue("@uCWeight", float.Parse(mcdBirthW.Text));
-            cmd.Parameters.AddWithValue("@uCBreed", mcdBreed.SelectedValue);
-            cmd.Parameters.AddWithValue("@uCPType", mcdProductType.SelectedValue);
-
-            if (cpc.State == ConnectionState.Open)
-            {
-                cpc.Close();
-            }
-            cpc.Open();
-
-            double k = cmd.ExecuteNonQuery();
-            if (k != 0)
-            {
-                mcdNotif.Attributes["class"] = mcdNotif.Attributes["class"].Replace("alert-warning", "alert-success").Trim();
-                mcdTitle.InnerText = "Data Updated!";
-                mcdText.InnerText = "Data has been modified and save. To see the current updated database look in the top database table.";
-                mcdType.SelectedIndex = -1;
-                mcdBirthD.Text = "DD/MM/YYYY";
-                mcdBirthW.Text = "0";
-                mcdBreed.SelectedIndex = -1;
-                mcdProductType.SelectedIndex = -1;
-                GridView1.DataBind();
-                mcdGridOut.DataSource = "";
-                mcdGridOut.DataBind();
-            }
-            cpc.Close();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "script","alert('Data has been updated!')", true);
-        }
-
-        protected void mcdClear_Click(object sender, EventArgs e)
-        {
-            mcdNotif.Attributes["class"] = mcdNotif.Attributes["class"].Replace("alert-warning", "alert-info").Trim();
-            mcdTitle.InnerText = "Cleared!";
-            mcdText.InnerText = "Manage Chicken Database textboxes and radio buttons data's is cleared.";
-            mcdType.SelectedIndex = -1;
-            mcdBirthD.Text = "DD/MM/YYYY";
-            mcdBirthW.Text = "0";
-            mcdBreed.SelectedIndex = -1;
-            mcdProductType.SelectedIndex = -1;
-        }
-
-        protected void mcdDelte_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void srcBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,18 +306,11 @@ namespace WebOnlinePoultry
             cpc.Close();
         }
 
-        protected void CType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            mcdReqType.Enabled = false;
-            mcdReqBirth.Enabled = false;
-            mcdReqWeight.Enabled = false;
-            mcdReqBreed.Enabled = false;
-            mcdReqPType.Enabled = false;
-        }
-
         protected void mcdRowSelect_Click(object sender, EventArgs e)
         {
             int rowIndex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+
+            mcdSelectedID.Value = mcdGridOut.Rows[rowIndex].Cells[0].Text;
 
             if (mcdGridOut.Rows[rowIndex].Cells[1].Text.Trim().Equals("Layer"))
             {
@@ -406,6 +353,76 @@ namespace WebOnlinePoultry
             {
                 mcdProductType.SelectedIndex = -1;
             }
+        }
+
+        protected void mcdClear_Click(object sender, EventArgs e)
+        {
+            mcdNotif.Attributes["class"] = mcdNotif.Attributes["class"].Replace("alert-warning", "alert-info").Trim();
+            mcdTitle.InnerText = "Cleared!";
+            mcdText.InnerText = "Manage Chicken Database textboxes and radio buttons data's is cleared.";
+            mcdType.SelectedIndex = -1;
+            mcdBirthD.Text = "DD/MM/YYYY";
+            mcdBirthW.Text = "0";
+            mcdBreed.SelectedIndex = -1;
+            mcdProductType.SelectedIndex = -1;
+        }
+
+        protected void mcdSave_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand("poultryUpdate", cpc);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Uid", Convert.ToInt32(mcdSelectedID.Value));
+            cmd.Parameters.AddWithValue("@uCType", mcdType.SelectedValue);
+            cmd.Parameters.AddWithValue("@uCBirth", mcdBirthD.Text);
+            cmd.Parameters.AddWithValue("@uCWeight", float.Parse(mcdBirthW.Text));
+            cmd.Parameters.AddWithValue("@uCBreed", mcdBreed.SelectedValue);
+            cmd.Parameters.AddWithValue("@uCPType", mcdProductType.SelectedValue);
+
+            if (cpc.State == ConnectionState.Open)
+            {
+                cpc.Close();
+            }
+            cpc.Open();
+
+            double k = cmd.ExecuteNonQuery();
+            if (k != 0)
+            {
+                mcdNotif.Attributes["class"] = mcdNotif.Attributes["class"].Replace("alert-warning", "alert-success").Trim();
+                mcdTitle.InnerText = "Data Updated!";
+                mcdText.InnerText = "Data has been modified and save. To see the current updated database look in the top database table.";
+                mcdType.SelectedIndex = -1;
+                mcdBirthD.Text = "DD/MM/YYYY";
+                mcdBirthW.Text = "0";
+                mcdBreed.SelectedIndex = -1;
+                mcdProductType.SelectedIndex = -1;
+                GridView1.DataBind();
+                mcdGridOut.DataSource = "";
+                mcdGridOut.DataBind();
+            }
+            cpc.Close();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Data has been updated!')", true);
+        }
+
+        protected void mcdDelete_Click1(object sender, EventArgs e)
+        {
+            int rowIndex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            int ID = Convert.ToInt32(mcdGridOut.Rows[rowIndex].Cells[0].Text);
+
+            SqlCommand cmd = new SqlCommand("poultryDelete", cpc);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", ID);
+            cmd.ExecuteNonQuery();
+            cpc.Close();
+
+            cpc.Open();
+            cmd = new SqlCommand("poultrySearchBy", cpc);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Cid", Convert.ToInt32(ID));
+            mcdGridOut.DataSource = cmd.ExecuteReader();
+            mcdGridOut.DataBind();
+            GridView1.DataBind();
+            cpc.Close();
         }
     }
 }

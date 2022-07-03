@@ -196,13 +196,14 @@
                                         <asp:RequiredFieldValidator ID="mcdReqPType" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdProductType" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
+                                        <asp:HiddenField ID="mcdSelectedID" runat="server" />
                                         <h2 id="testout" runat="server"></h2>
                                     </td>
                                 </tr>  
                             </table>
                         </div>
                         <br />
-                        <asp:GridView ID="mcdGridOut" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive table-hover" Width="100%" GridLines="Vertical" EmptyDataText="No Data Record Found." AllowSorting="True" HorizontalAlign="Center"  DataKeyNames="Id" >
+                        <asp:GridView ID="mcdGridOut" runat="server" AutoGenerateColumns="False" CssClass="table table-responsive table-hover" Width="100%" GridLines="Vertical" EmptyDataText="No Data Record Found." AllowSorting="True" HorizontalAlign="Center" >
                             <Columns>
                                 <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" InsertVisible="False" ItemStyle-Width="40" >
                                     <HeaderStyle HorizontalAlign="Center" />
@@ -236,9 +237,16 @@
 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="mcdRowSelect_Click" />
+                                        <asp:Button ID="Button1" runat="server" Text="Select" OnClick="mcdRowSelect_Click" />
                                     </ItemTemplate>
                                     <ControlStyle CssClass="btn btn-default" />
+                                    <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                </asp:TemplateField>
+
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button ID="mcdDelete" runat="server" Text="Delete" CssClass="btn btn-danger" OnClick="mcdDelete_Click1" OnClientClick="return confirm('Are you sure you want to delete this?')" />
+                                    </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                 </asp:TemplateField>
 
