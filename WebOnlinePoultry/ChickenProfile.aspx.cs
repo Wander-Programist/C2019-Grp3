@@ -52,7 +52,7 @@ namespace WebOnlinePoultry
 
             cmd.Parameters.AddWithValue("@iCType", CType.SelectedValue);
             cmd.Parameters.AddWithValue("@iCBirthD", CBirthD.Text);
-            cmd.Parameters.AddWithValue("@iCBirthW", float.Parse(CBirthW.Text));
+            cmd.Parameters.AddWithValue("@iCBirthW", CBirthW.Text);
             cmd.Parameters.AddWithValue("@iPType", ProductType.SelectedValue);
 
             int k = cmd.ExecuteNonQuery();
@@ -109,12 +109,9 @@ namespace WebOnlinePoultry
                     srcButton.Enabled = true;
                     srcRadioValidator.Enabled = true;
                     srcRadio.Items.Clear();
-                    srcRadio.Items.Add("Layer");
-                    srcRadio.Items[0].Value = "Layer";
-                    srcRadio.Items.Add("Broiler");
-                    srcRadio.Items[1].Value = "Broiler";
-                    srcRadio.Items.Add("Native");
-                    srcRadio.Items[2].Value = "Native";
+                    srcRadio.Items.Insert(0, new ListItem("Layer", "Layer"));
+                    srcRadio.Items.Insert(1, new ListItem("Broiler", "Broiler"));
+                    srcRadio.Items.Insert(2, new ListItem("Native", "Native"));
                     srcRadio.Attributes.Add("CssClass", "form-control-custome radio-custome");
 
                     srcBoxRange.Enabled = false;
@@ -187,10 +184,8 @@ namespace WebOnlinePoultry
                     srcRadio.Items.Clear();
                     srcRadio.Enabled = true;
                     srcRadio.Visible = true;
-                    srcRadio.Items.Add("45 Days");
-                    srcRadio.Items[0].Value = "45 Days";
-                    srcRadio.Items.Add("9 Days");
-                    srcRadio.Items[1].Value = "9 Days";
+                    srcRadio.Items.Insert(0, new ListItem("45 Days", "45 Days"));
+                    srcRadio.Items.Insert(1, new ListItem("9 Days", "9 Days"));
 
                     srcButton.Enabled = true;
                     srcRadioValidator.Enabled = true;
@@ -250,11 +245,11 @@ namespace WebOnlinePoultry
             {
                 if (srcBy.SelectedValue.Equals("srcID"))
                 {
-                    cmd.Parameters.AddWithValue("@Cid", Convert.ToInt32(srcBox.Value));
+                    cmd.Parameters.AddWithValue("@Cid", srcBox.Value);
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@CWeight", float.Parse(srcBox.Value));
+                    cmd.Parameters.AddWithValue("@CWeight", srcBox.Value);
                 }
             }
             if (!srcBox.Disabled && srcBox.Type.Equals("date"))
@@ -322,10 +317,10 @@ namespace WebOnlinePoultry
             SqlCommand cmd = new SqlCommand("poultryUpdate", cpc);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@Uid", Convert.ToInt32(mcdSelectedID.Value));
+            cmd.Parameters.AddWithValue("@Uid", mcdSelectedID.Value);
             cmd.Parameters.AddWithValue("@uCType", mcdType.SelectedValue);
             cmd.Parameters.AddWithValue("@uCBirth", mcdBirthD.Text);
-            cmd.Parameters.AddWithValue("@uCWeight", float.Parse(mcdBirthW.Text));
+            cmd.Parameters.AddWithValue("@uCWeight", mcdBirthW.Text);
             cmd.Parameters.AddWithValue("@uCPType", mcdProductType.SelectedValue);
 
             if (cpc.State == ConnectionState.Open)
@@ -366,11 +361,12 @@ namespace WebOnlinePoultry
             cpc.Open();
             cmd = new SqlCommand("poultrySearchBy", cpc);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Cid", Convert.ToInt32(ID));
+            cmd.Parameters.AddWithValue("@Cid", ID);
             mcdGridOut.DataSource = cmd.ExecuteReader();
             mcdGridOut.DataBind();
             GridView1.DataBind();
             cpc.Close();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Data has been deleted!')", true);
         }
     }
 }

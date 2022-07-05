@@ -24,7 +24,7 @@
                                 Chicken Birthday:
                             </td>  
                             <td aria-orientation="horizontal" style="width: 100%">  
-                                <asp:TextBox ID="CBirthD" runat="server" Width="100%" TextMode="Date" format="yyyy/MMM/dd" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="CBirthD" runat="server" Width="100%" TextMode="Date" CssClass="form-control"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="CBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
                             </td>  
                         </tr>  
@@ -109,7 +109,7 @@
                                         Chicken Birthday:
                                     </td>  
                                     <td style="text-align: left; vertical-align: middle;">  
-                                        <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" format="dd/MMM/yyyy" CssClass="form-control" AutoPostBack="True" ></asp:TextBox>
+                                        <asp:TextBox ID="mcdBirthD" runat="server" TextMode="Date" CssClass="form-control" AutoPostBack="True" ></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="mcdReqBirth" runat="server" ErrorMessage="Chicken birthday cannot be empty." Text="*" ControlToValidate="mcdBirthD" CssClass="text-danger" ValidationGroup="AllValidators" Display="Dynamic" SetFocusOnError="True" Enabled="False"></asp:RequiredFieldValidator>
                                     </td>  
                                     <td colspan="3" style="text-align: left; vertical-align: middle">
