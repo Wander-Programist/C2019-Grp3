@@ -130,6 +130,7 @@ button {
 button,
 select {
   text-transform: none;
+  max-width: 280px;
 }
 button,
 html input[type="button"],
@@ -2282,10 +2283,20 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
+  padding: 4px;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #dddddd;
+}
+.table .custom > thead > tr > th,
+.table .custom > tbody > tr > th,
+.table .custom > tfoot > tr > th,
+.table .custom > thead > tr > td,
+.table .custom > tbody > tr > td,
+.table .custom > tfoot > tr > td {
+  padding: 4px;
+  line-height: 1.42857143;
+  vertical-align: top;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -6898,4 +6909,7 @@ a.list-group-item-danger.active:focus {
 }
 .scorlling {
     position: absolute;
+}
+div table tbody tr td select .ddl-custom {
+    max-width: 280px;
 }

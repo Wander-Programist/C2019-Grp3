@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -43,7 +39,7 @@ namespace WebOnlinePoultry
             switch (ddlPType.SelectedValue)
             {
                 case "Egg":
-                    if (ddlSType.Items.Count > 0)
+                    if (ddlSType.Items.Count > 0 && TBKiloQuanty.Enabled)
                     {
                         ddlSType.Items.Clear();
                         identifier = "";
@@ -54,7 +50,6 @@ namespace WebOnlinePoultry
                         TBKiloQuanty.Enabled = false;
                         RanKiloQuanty.Enabled = false;
                         ReqKiloQuanty.Enabled = false;
-                        RegKiloQuanty.Enabled = false;
                         btnUpdate.Enabled = false;
                     }
                     identifier = "Select EggSizes, Quantity From EggSizesAvailable";
@@ -65,7 +60,7 @@ namespace WebOnlinePoultry
                     break;
 
                 case "Whole":
-                    if (ddlSType.Items.Count > 0)
+                    if (ddlSType.Items.Count > 0 && TBKiloQuanty.Enabled)
                     {
                         ddlSType.Items.Clear();
                         identifier = "";
@@ -76,7 +71,6 @@ namespace WebOnlinePoultry
                         TBKiloQuanty.Enabled = false;
                         RanKiloQuanty.Enabled = false;
                         ReqKiloQuanty.Enabled = false;
-                        RegKiloQuanty.Enabled = false;
                         btnUpdate.Enabled = false;
                     }
                     identifier = "Select WholeType, Quantity From WholeChickenAvailable";
@@ -87,7 +81,7 @@ namespace WebOnlinePoultry
                     break;
 
                 case "Parts":
-                    if (ddlSType.Items.Count > 0)
+                    if (ddlSType.Items.Count > 0 && TBKiloQuanty.Enabled)
                     {
                         ddlSType.Items.Clear();
                         identifier = "";
@@ -98,7 +92,6 @@ namespace WebOnlinePoultry
                         TBKiloQuanty.Enabled = false;
                         RanKiloQuanty.Enabled = false;
                         ReqKiloQuanty.Enabled = false;
-                        RegKiloQuanty.Enabled = false;
                         btnUpdate.Enabled = false;
                     }
                     identifier = "Select ChickenParts, Kilos From ChickenPartsAvailable";
@@ -119,7 +112,6 @@ namespace WebOnlinePoultry
                     TBKiloQuanty.Enabled = false;
                     RanKiloQuanty.Enabled = false;
                     ReqKiloQuanty.Enabled = false;
-                    RegKiloQuanty.Enabled = false;
                     ddlSType.SelectedIndex = -1;
                     labelQK.InnerText = "";
                     break;
@@ -155,6 +147,7 @@ namespace WebOnlinePoultry
                     updateQuery.Value = "UPDATE ChickenPartsAvailable SET ChickenParts = @CurName, Kilos = CAST(@NewVal AS INT), Date = CONVERT(DATE, CAST(GETDATE() AS DATE), 107) WHERE ChickenParts = CAST(@Identifier AS NVARCHAR(20))";
                     break;
                 default:
+                    query = null;
                     break;
             }
             if (ddlSType.SelectedIndex != -1 && query != null)
@@ -166,10 +159,15 @@ namespace WebOnlinePoultry
                 {
                     TBKiloQuanty.Text = da.GetValue(1).ToString();
                 }
-                TBKiloQuanty.Enabled = true;
-                ReqKiloQuanty.Enabled = true;
                 cpc.Close();
                 query = null;
+                TBKiloQuanty.Enabled = true;
+                ReqKiloQuanty.Enabled = true;
+                btnUpdate.Enabled = true;
+            }
+            if (ddlSType.SelectedIndex > 0 && !btnUpdate.Enabled)
+            {
+                btnUpdate.Enabled = true;
             }
         }
 

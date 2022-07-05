@@ -10,7 +10,7 @@
 namespace WebOnlinePoultry {
     
     
-    public partial class Products {
+    public partial class Sales {
         
         /// <summary>
         /// ddlPType control.
@@ -22,67 +22,76 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.DropDownList ddlPType;
         
         /// <summary>
-        /// ddlSType control.
+        /// labelSubName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSType;
+        protected global::System.Web.UI.WebControls.Label labelSubName;
         
         /// <summary>
-        /// labelQK control.
+        /// ddlSPType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell labelQK;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSPType;
         
         /// <summary>
-        /// TBKiloQuanty control.
+        /// labelVolumeType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TBKiloQuanty;
+        protected global::System.Web.UI.WebControls.Label labelVolumeType;
         
         /// <summary>
-        /// RanKiloQuanty control.
+        /// ddlVolumeType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RanKiloQuanty;
+        protected global::System.Web.UI.WebControls.DropDownList ddlVolumeType;
         
         /// <summary>
-        /// ReqKiloQuanty control.
+        /// labelVolume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqKiloQuanty;
+        protected global::System.Web.UI.WebControls.Label labelVolume;
         
         /// <summary>
-        /// testOut control.
+        /// TBVolume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl testOut;
+        protected global::System.Web.UI.WebControls.TextBox TBVolume;
         
         /// <summary>
-        /// updateQuery control.
+        /// RangeValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField updateQuery;
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// btnUpdate control.
@@ -94,57 +103,39 @@ namespace WebOnlinePoultry {
         protected global::System.Web.UI.WebControls.Button btnUpdate;
         
         /// <summary>
-        /// SqlSourceEgg control.
+        /// btnAddSale control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceEgg;
+        protected global::System.Web.UI.WebControls.Button btnAddSale;
         
         /// <summary>
-        /// EggDB control.
+        /// SubIdentifier control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView EggDB;
+        protected global::System.Web.UI.WebControls.HiddenField SubIdentifier;
         
         /// <summary>
-        /// SqlSourceWholeChicken control.
+        /// QuerySaver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceWholeChicken;
+        protected global::System.Web.UI.WebControls.HiddenField QuerySaver;
         
         /// <summary>
-        /// WholeChickenDB control.
+        /// testOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView WholeChickenDB;
-        
-        /// <summary>
-        /// SqlSourceChickenParts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceChickenParts;
-        
-        /// <summary>
-        /// ChickenPartsDB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ChickenPartsDB;
+        protected global::System.Web.UI.WebControls.Label testOut;
     }
 }

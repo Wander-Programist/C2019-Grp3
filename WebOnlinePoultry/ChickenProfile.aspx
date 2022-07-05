@@ -5,8 +5,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="col-md-4">
-                    <h3 style="font-weight:bolder">
-                        Create New Data</h3>
+                    <h1 style="padding: 10px 0px 10px 20px; font-weight: bold; font-variant: small-caps; font-family: Poppins; vertical-align: middle; background-color: #CCCCCC">Chick Profile Manager</h1>
                     <table class="table table-condensed">   
                         <tr>  
                             <td style="width: inherit;">Chicken Type:</td>  
