@@ -66,14 +66,14 @@
                     </h5>
 
                     <div style="width: 100%; height: 60vh; overflow-y:auto">
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT * FROM [ChickenProfile]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT Id, chickenType, FORMAT(CAST(chickenBirthday AS DATE), 'dd-MMM-yyyy') as date, chickenBirthWeight, productType FROM ChickenProfile"></asp:SqlDataSource>
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CellPadding="1" Font-Size="Large" Width="100%" AllowSorting="True" CssClass="table table-hover table-responsive" GridLines="Vertical" DataKeyNames="Id" DataSourceID="SqlDataSource1" >
                             <Columns>
-                                <asp:BoundField DataField="Id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
-                                <asp:BoundField DataField="chickenType" HeaderText="TYPE" SortExpression="chickenType" />
-                                <asp:BoundField DataField="chickenBirthday" HeaderText="BIRTHDAY" SortExpression="chickenBirthday" />
-                                <asp:BoundField DataField="chickenBirthWeight" HeaderText="BIRTH WEIGHT" SortExpression="chickenBirthWeight" />
-                                <asp:BoundField DataField="productType" HeaderText="PRODUCT TYPE" SortExpression="productType" />
+                                <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                                <asp:BoundField DataField="chickenType" HeaderText="chickenType" SortExpression="chickenType" />
+                                <asp:BoundField DataField="date" HeaderText="date" SortExpression="date" ReadOnly="True" />
+                                <asp:BoundField DataField="chickenBirthWeight" HeaderText="chickenBirthWeight" SortExpression="chickenBirthWeight" />
+                                <asp:BoundField DataField="productType" HeaderText="productType" SortExpression="productType" />
                             </Columns>
                         <HeaderStyle CssClass="table-header" ForeColor="white"/>
                     </asp:GridView>
@@ -81,7 +81,7 @@
                 </div>
             
                 <div class="col-md-12">
-                    <h1 style="font-weight: bolder">Manage Chicken Database</h1>
+                    <h1 style="padding: 10px 0px 10px 20px; font-weight: bold; font-variant: small-caps; font-family: Poppins; vertical-align: middle; background-color: #CCCCCC">Chicken Profile Database Manager</h1>
                         <div class="alert alert-dismissible alert-warning" id="mcdNotif" runat="server">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4 runat="server" id="mcdTitle" style="font-weight: bold">Warning!</h4>
@@ -172,10 +172,7 @@
                                 </tr>  
                                 <tr>  
                                     <td style="text-align: right" colspan="5">
-                                        
-                                        <asp:HiddenField ID="mcdSelectedID" runat="server" />
-                                        <h2 id="testout" runat="server"></h2>
-                                        
+                                        <asp:HiddenField ID="mcdSelectedID" runat="server" Visible="False" />
                                     </td>  
                                 </tr>  
                             </table>

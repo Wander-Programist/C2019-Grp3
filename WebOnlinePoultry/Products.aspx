@@ -44,7 +44,7 @@
             </table>
         </div>
         <div class="col-md-7">
-            <h3>Available Eggs</h3>
+            <h4 style="font-weight: bold; font-variant: small-caps; ">Available Eggs</h4>
             <asp:SqlDataSource ID="SqlSourceEgg" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT * FROM [EggSizesAvailable]"></asp:SqlDataSource>
             <asp:GridView ID="EggDB" runat="server" AutoGenerateColumns="False" DataSourceID="SqlSourceEgg" Width="100%" >
                 <Columns>
@@ -63,9 +63,7 @@
                 </Columns>
                 <HeaderStyle BackColor="Black" Font-Bold="True" Font-Size="Large" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" />
             </asp:GridView>
-        </div>
-        <div class="col-md-7">
-            <h3>Available Whole Chicken</h3>
+             <h4 style="font-weight: bold; font-variant: small-caps; ">Available Whole Chicken</h4>
             <asp:SqlDataSource ID="SqlSourceWholeChicken" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT * FROM [WholeChickenAvailable]"></asp:SqlDataSource>
             <asp:GridView ID="WholeChickenDB" runat="server" AutoGenerateColumns="False" DataSourceID="SqlSourceWholeChicken" Width="100%">
                 <Columns>
@@ -84,9 +82,7 @@
                 </Columns>
                 <HeaderStyle BackColor="Black" Font-Bold="True" Font-Size="Large" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" />
             </asp:GridView>
-        </div>
-        <div class="col-md-7">
-            <h3>Available Chicken Parts</h3>
+             <h4 style="font-weight: bold; font-variant: small-caps; ">Available Chicken Parts</h4>
             <asp:SqlDataSource ID="SqlSourceChickenParts" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT * FROM [ChickenPartsAvailable]"></asp:SqlDataSource>
             <asp:GridView ID="ChickenPartsDB" runat="server" AutoGenerateColumns="False" DataSourceID="SqlSourceChickenParts" Width="100%">
                 <Columns>
