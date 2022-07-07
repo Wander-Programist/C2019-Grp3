@@ -8,7 +8,7 @@ namespace WebOnlinePoultry
 {
     public partial class Products : System.Web.UI.Page
     {
-        SqlConnection cpc = new SqlConnection(ConfigurationManager.ConnectionStrings["ChickenProfileDB"].ConnectionString);
+        SqlConnection cpc = new SqlConnection(ConfigurationManager.ConnectionStrings["someeDB"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {

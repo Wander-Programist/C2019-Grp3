@@ -1,5 +1,4 @@
-﻿
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="WebOnlinePoultry.Sales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Sales.aspx.cs" Inherits="WebOnlinePoultry.Sales" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -68,7 +67,7 @@
                 </div>
                 <h4 style="font-weight: bold; font-variant: small-caps; ">Sale History</h4>
                 <div class="col-md-7" style="height: 62.2vh; overflow-y:auto">
-                    <asp:SqlDataSource ID="SqlSourceSales" runat="server" ConnectionString="<%$ ConnectionStrings:ChickenProfileDB %>" SelectCommand="SELECT Id, productType, categoryName, volumeType, quantity, FORMAT (CAST(CurrentDate AS DATE), 'dd-MMM-yyyy') as date, pricing, Totals FROM SaleDB"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlSourceSales" runat="server" ConnectionString="<%$ ConnectionStrings:someeDB %>" SelectCommand="SELECT Id, productType, categoryName, volumeType, quantity, FORMAT (CAST(CurrentDate AS DATE), 'dd-MMM-yyyy') as date, pricing, Totals FROM SaleDB"></asp:SqlDataSource>
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlSourceSales" Width="100%" DataKeyNames="Id" CssClass="table table table-hover table-responsive" AllowSorting="True" >
                         <Columns>
                             <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" InsertVisible="False" ReadOnly="True" >

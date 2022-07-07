@@ -5,26 +5,20 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
+
 namespace WebOnlinePoultry
 {
-    public partial class Database : System.Web.UI.Page
+    public partial class Chicken_Profile : System.Web.UI.Page
     {
         SqlConnection cpc = new SqlConnection(ConfigurationManager.ConnectionStrings["someeDB"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(cpc.State == ConnectionState.Open)
+            if (cpc.State == ConnectionState.Open)
             {
                 cpc.Close();
             }
-            try
-            {
-                cpc.Open();
-            }
-            catch (Exception)
-            {
-                Server.TransferRequest(Request.Url.AbsolutePath, false);
-            }
+            cpc.Open();
             if (!IsPostBack)
             {
                 dbUpdater.Text = "Connected!";
